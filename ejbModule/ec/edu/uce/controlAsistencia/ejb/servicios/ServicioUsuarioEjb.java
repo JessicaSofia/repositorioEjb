@@ -1,6 +1,5 @@
 package ec.edu.uce.controlAsistencia.ejb.servicios;
 
-import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -9,7 +8,7 @@ import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.sun.prism.Texture.Usage;
+
 
 import ec.edu.uce.controlAsistencia.jpa.entidades.Usuario;
 
