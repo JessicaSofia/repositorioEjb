@@ -33,6 +33,12 @@ public interface VacacionServicio  {
 	 */
 	public List<SaldoVacacion> listSaldoVacacionPorDetallePuestoId(int DetallePuestoId);
 	
+	/**
+	 * Obtiene el registro con  el mumero Maximo de Autorizacion 
+	 * @return
+	 */
+	public int  MaximaNumAutorizacion();
+	
 
 	
 	

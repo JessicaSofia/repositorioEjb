@@ -57,7 +57,7 @@ public class DetallePuestoServicioImpl implements DetallePuestoServicio {
 		sbsql.append(" Select dtlp from DetallePuesto dtpl where");
 		sbsql.append(" dtpl.Persona.PrsPrimerApellido LIKE :apellidos");
 		Query q = em.createQuery(sbsql.toString());
-		q.setParameter(apellidos,"%"+apellidos+"%");
+		q.setParameter("apellidos","%"+apellidos+"%");
 		retorno = (List<DetallePuesto>)q.getResultList();
 		
 		}catch(Exception  e){
