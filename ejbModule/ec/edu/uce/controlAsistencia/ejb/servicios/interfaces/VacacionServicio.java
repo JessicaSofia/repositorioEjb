@@ -39,7 +39,11 @@ public interface VacacionServicio  {
 	 */
 	public int  MaximaNumAutorizacion();
 	
-
+	/**
+	 * obtiene un objeto de Tipo saldo   Vacacion Por periodo
+	 * @param periodo
+	 */
+	public SaldoVacacion  ObtenerSaldoVacacionPorPeriodo( int periodo);
 	
 	
 	 
