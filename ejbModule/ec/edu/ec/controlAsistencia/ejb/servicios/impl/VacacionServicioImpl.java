@@ -34,13 +34,17 @@ public class VacacionServicioImpl implements  VacacionServicio {
     }
 
 	@Override
-	public void VacionInsertar(Vacacion vacacion) {
+	public boolean VacionInsertar(Vacacion vacacion) {
+		boolean retorno = false;
 		try {
 			em.persist(vacacion);
+			retorno= true;
 			
 		}catch(Exception  e){
 			throw e;
+			                                        
 		}
+		return retorno;
 		
 	}
 
@@ -66,8 +70,15 @@ public class VacacionServicioImpl implements  VacacionServicio {
 	
 
 	@Override
-	public void VacacionActualizar(Vacacion vacacion) {
-		// TODO Auto-generated method stub
+	public Vacacion VacacionActualizar(Vacacion vacacion) {
+		Vacacion retorno=null;
+		try{
+			
+			retorno=em.merge(vacacion);
+		}catch(Exception e ) {
+			throw e;
+		}
+		return retorno;
 		
 	}
 
@@ -113,14 +124,15 @@ public class VacacionServicioImpl implements  VacacionServicio {
 	}
 
 	@Override
-	public SaldoVacacion  ObtenerSaldoVacacionPorPeriodo(int periodo) {
+	public SaldoVacacion  ObtenerSaldoVacacionPorPeriodo(int periodo, int dtpsId) {
 		SaldoVacacion saldoVacacionPeriodo=null;
 			   try{
 				   StringBuffer sbsql = new StringBuffer();
 					sbsql.append(" select svc from SaldoVacacion  svc");
-					sbsql.append(" WHERE  svc.slvcPeriodo = :periodo)");
+					sbsql.append(" WHERE  svc.slvcPeriodo = :periodo and svc.detallePuesto.dtpsId= :dtpsId)");
 					Query q = em.createQuery(sbsql.toString(), SaldoVacacion.class);
 					q.setParameter("periodo",periodo);
+					q.setParameter("dtpsId", dtpsId);
 					saldoVacacionPeriodo = (SaldoVacacion) q.getSingleResult();
 						
 					
@@ -130,6 +142,18 @@ public class VacacionServicioImpl implements  VacacionServicio {
 				}
 		 return saldoVacacionPeriodo;
 		
+	}
+
+	@Override
+	public SaldoVacacion ActualizarSaldoVacacion(SaldoVacacion saldoVacacion) {
+		SaldoVacacion retorno= null;
+		try {
+			 retorno=em.merge(saldoVacacion);
+			 
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		return retorno;
 	}
 
 	

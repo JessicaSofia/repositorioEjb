@@ -17,4 +17,6 @@ public interface DetallePuestoServicio {
 	
 	public DetallePuestoDto BuscarPorId(int id);
 	
+	
+	public DetallePuesto DetallePuestoBuscarPorId(int id) ;
 }

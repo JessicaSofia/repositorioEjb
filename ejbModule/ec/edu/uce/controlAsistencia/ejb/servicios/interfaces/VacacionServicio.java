@@ -11,7 +11,7 @@ public interface VacacionServicio  {
 	 * Inserta un  nuevo Objeto de Tipo Vacacion 
 	 * @param vacacion 
 	 */
-	public void  VacionInsertar(Vacacion vacacion);
+	public boolean  VacionInsertar(Vacacion vacacion);
 	
 	/**
 	 * 
@@ -24,7 +24,7 @@ public interface VacacionServicio  {
 	 *  Actualiza un Objeto de Tipo vacacion
 	 * @param vacacion
 	 */
-	public void VacacionActualizar(Vacacion  vacacion);
+	public Vacacion VacacionActualizar(Vacacion  vacacion);
 	
 	/**
 	 * Obtiene  una lista de Todos los saldos de Vacaciones de Periodos Activos
@@ -40,11 +40,16 @@ public interface VacacionServicio  {
 	public int  MaximaNumAutorizacion();
 	
 	/**
-	 * obtiene un objeto de Tipo saldo   Vacacion Por periodo
+	 * obtiene un objeto de Tipo saldo   Vacacion Por periodo y por detallePuestoId
 	 * @param periodo
 	 */
-	public SaldoVacacion  ObtenerSaldoVacacionPorPeriodo( int periodo);
+	public SaldoVacacion  ObtenerSaldoVacacionPorPeriodo( int periodo, int dtpsId);
 	
-	
-	 
+	/**
+	 * Actualiza un objeto de tipo SaldoVacacion
+	 * @param saldoVacacion
+	 * @return
+	 */
+	 public SaldoVacacion  ActualizarSaldoVacacion(SaldoVacacion saldoVacacion); 
 }
+  

@@ -32,7 +32,7 @@ public class PuestoServicioImpl implements PuestoServicio {
     	
     	Puesto puesto=null;
     	try{
-    		puesto=em.find(Puesto.class, id);
+    		puesto=em.find(Puesto.class,id);
     	}catch(Exception e) {
     		throw e;
     	}

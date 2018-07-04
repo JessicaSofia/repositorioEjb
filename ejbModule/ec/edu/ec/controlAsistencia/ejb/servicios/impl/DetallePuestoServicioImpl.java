@@ -73,4 +73,17 @@ public class DetallePuestoServicioImpl implements DetallePuestoServicio {
 			return detallePuesto;
 		}
 
+
+		@Override
+		public DetallePuesto DetallePuestoBuscarPorId(int id) {
+			DetallePuesto  detallePuesto=null;
+			try {
+				
+				detallePuesto=em.find(DetallePuesto.class, id);
+			}catch (Exception e) {
+				
+			}
+			return detallePuesto;  
+		}
+
 }
