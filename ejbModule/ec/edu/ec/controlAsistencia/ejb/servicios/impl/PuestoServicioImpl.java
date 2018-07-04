@@ -29,11 +29,15 @@ public class PuestoServicioImpl implements PuestoServicio {
      * @see PuestoServicio#BuscarPorId(int)
      */
     public Puesto BuscarPorId(int id) {
-    	{
-    		em.find(Puesto.class, id);
+    	
+    	Puesto puesto=null;
+    	try{
+    		puesto=em.find(Puesto.class, id);
+    	}catch(Exception e) {
+    		throw e;
     	}
     	
-			return null;
+		return puesto;	
     }
 
 }

@@ -17,6 +17,7 @@ public class PersonaDto  implements Serializable {
 	private int fcemId;
 	private int dtpsId;
 	private int dpnId;
+	private int pstId;
 	private int rgmId;
 	private int rllbId;
 	
@@ -31,7 +32,7 @@ public class PersonaDto  implements Serializable {
 	
 	
 	public PersonaDto(int prsId, String prsNombres, String prsIdentificacion, String prsPrimerApellido,
-			String prsSegundoApellido, int fcemId, int dtpsId, int dpnId , int rgmId , int rllbId) {
+			String prsSegundoApellido, int fcemId, int dtpsId, int dpnId , int pstId, int rgmId , int rllbId) {
 		super();
 		this.prsId = prsId;
 		this.prsNombres = prsNombres;
@@ -41,8 +42,23 @@ public class PersonaDto  implements Serializable {
 		this.fcemId = fcemId;
 		this.dtpsId = dtpsId;
 		this.dpnId = dpnId;
+		this.pstId=pstId;
 		this.rgmId = rgmId;
 		this.rllbId = rllbId;
+	}
+
+
+
+
+	public int getPstId() {
+		return pstId;
+	}
+
+
+
+
+	public void setPstId(int pstId) {
+		this.pstId = pstId;
 	}
 
 

@@ -29,8 +29,14 @@ public class RegimenServicioImpl implements RegimenServicio {
      * @see RegimenServicio#BuscarPorId(int)
      */
     public Regimen BuscarPorId(int id) {
-        // TODO Auto-generated method stub
-			return null;
+       Regimen regimen=null;
+       try {
+    	   regimen=em.find(Regimen.class,id);
+       }catch (Exception e) {
+		throw e;
+	}
+       return regimen;
+			
     }
 
 }

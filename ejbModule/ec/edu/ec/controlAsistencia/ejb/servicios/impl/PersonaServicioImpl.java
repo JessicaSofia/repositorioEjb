@@ -46,7 +46,7 @@ public class PersonaServicioImpl implements PersonaServicio {
     	
 		try{
 		StringBuffer sbsql = new StringBuffer();
-		sbsql.append(" Select prs.prsId, prs.prsNombres, prs.prsIdentificacion, prs.prsPrimerApellido, prs.prsSegundoApellido, fch.fcemId, dtlp.dtpsId, dtlp.dependencia.dpnId, groc.regimen.rgmId, dtlp.relacionLaboral.rllbId");
+		sbsql.append(" Select prs.prsId, prs.prsNombres, prs.prsIdentificacion, prs.prsPrimerApellido, prs.prsSegundoApellido, fch.fcemId, dtlp.dtpsId, dtlp.dependencia.dpnId, dtlp.puesto.pstId, groc.regimen.rgmId, dtlp.relacionLaboral.rllbId");
 		sbsql.append(" from Persona prs, FichaEmpleado fch, DetallePuesto dtlp , Puesto p, GrupoOcupacional groc  where");
 		sbsql.append(" prs.prsNombres LIKE :nombres ");
 		sbsql.append(" and fch.persona.prsId=prs.prsId");
@@ -62,7 +62,7 @@ public class PersonaServicioImpl implements PersonaServicio {
         while (itr.hasNext()){
             Object[] obj = (Object[]) itr.next();
             p = new PersonaDto(Integer.parseInt(String.valueOf(obj[0])),String.valueOf(obj[1]),String.valueOf(obj[2]).trim(),String.valueOf(obj[3]),String.valueOf(obj[4]),
-            Integer.parseInt(String.valueOf(obj[5])),Integer.parseInt(String.valueOf(obj[6])),Integer.parseInt(String.valueOf(obj[7])), Integer.parseInt(String.valueOf(obj[8])),Integer.parseInt(String.valueOf(obj[9])));
+            Integer.parseInt(String.valueOf(obj[5])),Integer.parseInt(String.valueOf(obj[6])),Integer.parseInt(String.valueOf(obj[7])), Integer.parseInt(String.valueOf(obj[8])),Integer.parseInt(String.valueOf(obj[9])),Integer.parseInt(String.valueOf(obj[10])));
             persona.add(p);
         }
 		}catch(Exception  e){

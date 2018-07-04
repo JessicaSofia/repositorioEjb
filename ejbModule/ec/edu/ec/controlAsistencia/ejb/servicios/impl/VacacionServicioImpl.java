@@ -119,7 +119,7 @@ public class VacacionServicioImpl implements  VacacionServicio {
 				   StringBuffer sbsql = new StringBuffer();
 					sbsql.append(" select svc from SaldoVacacion  svc");
 					sbsql.append(" WHERE  svc.slvcPeriodo = :periodo)");
-					Query q = em.createQuery(sbsql.toString());
+					Query q = em.createQuery(sbsql.toString(), SaldoVacacion.class);
 					q.setParameter("periodo",periodo);
 					saldoVacacionPeriodo = (SaldoVacacion) q.getSingleResult();
 						
