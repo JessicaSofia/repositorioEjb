@@ -46,11 +46,14 @@ public class PersonaServicioImpl implements PersonaServicio {
     	
 		try{
 		StringBuffer sbsql = new StringBuffer();
-		sbsql.append(" Select prs.prsId, prs.prsNombres, prs.prsIdentificacion, prs.prsPrimerApellido, prs.prsSegundoApellido, fch.fcemId, dtlp.dtpsId, dtlp.dependencia.dpnId  ");
-		sbsql.append(" from Persona prs, FichaEmpleado fch, DetallePuesto dtlp where ");
+		sbsql.append(" Select prs.prsId, prs.prsNombres, prs.prsIdentificacion, prs.prsPrimerApellido, prs.prsSegundoApellido, fch.fcemId, dtlp.dtpsId, dtlp.dependencia.dpnId, groc.regimen.rgmId, dtlp.relacionLaboral.rllbId");
+		sbsql.append(" from Persona prs, FichaEmpleado fch, DetallePuesto dtlp , Puesto p, GrupoOcupacional groc  where");
 		sbsql.append(" prs.prsNombres LIKE :nombres ");
 		sbsql.append(" and fch.persona.prsId=prs.prsId");
 		sbsql.append(" and dtlp.fichaEmpleado.fcemId=fch.fcemId");
+		sbsql.append(" and dtlp.puesto.pstId=p.pstId"); 
+		sbsql.append(" and p.grupoOcupacional.grocId=groc.grocId");
+		 
 		Query q = em.createQuery(sbsql.toString());
 		q.setParameter("nombres","%"+nombres+"%");
 		retorno = q.getResultList();
@@ -58,8 +61,8 @@ public class PersonaServicioImpl implements PersonaServicio {
 		Iterator itr = retorno.iterator();
         while (itr.hasNext()){
             Object[] obj = (Object[]) itr.next();
-            p = new PersonaDto(Integer.parseInt(String.valueOf(obj[0])),String.valueOf(obj[1]),String.valueOf(obj[2]),String.valueOf(obj[3]),String.valueOf(obj[4]),
-            Integer.parseInt(String.valueOf(obj[5])),Integer.parseInt(String.valueOf(obj[6])),Integer.parseInt(String.valueOf(obj[7])));
+            p = new PersonaDto(Integer.parseInt(String.valueOf(obj[0])),String.valueOf(obj[1]),String.valueOf(obj[2]).trim(),String.valueOf(obj[3]),String.valueOf(obj[4]),
+            Integer.parseInt(String.valueOf(obj[5])),Integer.parseInt(String.valueOf(obj[6])),Integer.parseInt(String.valueOf(obj[7])), Integer.parseInt(String.valueOf(obj[8])),Integer.parseInt(String.valueOf(obj[9])));
             persona.add(p);
         }
 		}catch(Exception  e){

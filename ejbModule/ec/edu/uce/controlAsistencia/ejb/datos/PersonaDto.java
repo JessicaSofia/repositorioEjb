@@ -11,12 +11,14 @@ public class PersonaDto  implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int prsId;
 	private String prsNombres;
-	private String     prsIdentificacion;
+	private String prsIdentificacion;
 	private String prsPrimerApellido;
 	private String prsSegundoApellido;
 	private int fcemId;
 	private int dtpsId;
 	private int dpnId;
+	private int rgmId;
+	private int rllbId;
 	
 	
 	
@@ -29,7 +31,7 @@ public class PersonaDto  implements Serializable {
 	
 	
 	public PersonaDto(int prsId, String prsNombres, String prsIdentificacion, String prsPrimerApellido,
-			String prsSegundoApellido, int fcemId, int dtpsId, int dpnId) {
+			String prsSegundoApellido, int fcemId, int dtpsId, int dpnId , int rgmId , int rllbId) {
 		super();
 		this.prsId = prsId;
 		this.prsNombres = prsNombres;
@@ -39,6 +41,36 @@ public class PersonaDto  implements Serializable {
 		this.fcemId = fcemId;
 		this.dtpsId = dtpsId;
 		this.dpnId = dpnId;
+		this.rgmId = rgmId;
+		this.rllbId = rllbId;
+	}
+
+
+
+
+	public int getRgmId() {
+		return rgmId;
+	}
+
+
+
+
+	public void setRgmId(int rgmId) {
+		this.rgmId = rgmId;
+	}
+
+
+
+
+	public int getRllbId() {
+		return rllbId;
+	}
+
+
+
+
+	public void setRllbId(int rllbId) {
+		this.rllbId = rllbId;
 	}
 
 
@@ -161,6 +193,10 @@ public class PersonaDto  implements Serializable {
 		return ""+ prsPrimerApellido+" "+ prsSegundoApellido+ "";
 	}
 	
+	
+public String nombresCompetos() {
+	return  prsNombres+" " + prsPrimerApellido+" "+ prsSegundoApellido+ "";
+}
 	
 
 }

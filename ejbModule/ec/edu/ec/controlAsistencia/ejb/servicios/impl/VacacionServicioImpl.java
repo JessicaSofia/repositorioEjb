@@ -100,7 +100,7 @@ public class VacacionServicioImpl implements  VacacionServicio {
 			 int anioactual=fechaFinal.get(Calendar.YEAR);
 				StringBuffer sbsql = new StringBuffer();
 				sbsql.append(" select  case when Max(vc.vccNumAutorizacion) is null then 0 else Max(vc.vccNumAutorizacion)  end from Vacacion  vc");
-				sbsql.append(" WHERE  day(vc.vccFechaEmision) =  :anioActual)");
+				sbsql.append(" WHERE  day(vc.vccFechaEmision) = :anioActual)");
 				Query q = em.createQuery(sbsql.toString());
 				q.setParameter("anioActual",anioactual);
 				numMaxima = (int) q.getSingleResult();
