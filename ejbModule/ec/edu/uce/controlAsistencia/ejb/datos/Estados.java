@@ -4,22 +4,20 @@ public enum Estados {
 
 	Activo(1),
 	Anulado(2),
-	Eliminado(3);
+	Eliminado(0);
 			
-	private int id;
+	private final int id;
 	
 	
-
-	private Estados(int id) {
+	 Estados(int id) {
 		this.id = id;
 	}
+
 
 	public int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 	
 }
