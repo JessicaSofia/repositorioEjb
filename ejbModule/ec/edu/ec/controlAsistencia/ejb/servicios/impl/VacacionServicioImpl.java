@@ -90,7 +90,7 @@ public class VacacionServicioImpl implements  VacacionServicio {
 		try{
 		StringBuffer sbsql = new StringBuffer();
 		sbsql.append(" Select svc from SaldoVacacion svc where");
-		sbsql.append(" svc.DetallePuesto.dtpsId =: detallePuestoId");
+		sbsql.append(" svc.DetallePuesto.dtpsId =  :detallePuestoId");
 		Query q = em.createQuery(sbsql.toString());
 		q.setParameter("detallePuestoId",detallePuestoId);
 		retorno = (List<SaldoVacacion>)q.getResultList();
@@ -111,7 +111,8 @@ public class VacacionServicioImpl implements  VacacionServicio {
 			 int anioactual=fechaFinal.get(Calendar.YEAR);
 				StringBuffer sbsql = new StringBuffer();
 				sbsql.append(" select  case when Max(vc.vccNumAutorizacion) is null then 0 else Max(vc.vccNumAutorizacion)  end from Vacacion  vc");
-				sbsql.append(" WHERE  day(vc.vccFechaEmision) = :anioActual)");
+				sbsql.append(" WHERE   year(vc.vccFechaEmision) = :anioActual)");
+				sbsql.append(" AND vc.vccEstado=1");
 				Query q = em.createQuery(sbsql.toString());
 				q.setParameter("anioActual",anioactual);
 				numMaxima = (int) q.getSingleResult();
@@ -130,6 +131,7 @@ public class VacacionServicioImpl implements  VacacionServicio {
 				   StringBuffer sbsql = new StringBuffer();
 					sbsql.append(" select svc from SaldoVacacion  svc");
 					sbsql.append(" WHERE  svc.slvcPeriodo = :periodo and svc.detallePuesto.dtpsId= :dtpsId)");
+					sbsql.append(" AND  svc.slvcEstado = 1)");
 					Query q = em.createQuery(sbsql.toString(), SaldoVacacion.class);
 					q.setParameter("periodo",periodo);
 					q.setParameter("dtpsId", dtpsId);
