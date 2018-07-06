@@ -5,7 +5,7 @@ import java.util.List;
 import ec.edu.uce.controlAsistencia.jpa.entidades.LicenciaYPermiso;
 
 
-public interface LicenciaPermiso { 
+public interface LicenciaPermisoServicio { 
 	
 	
 	/***

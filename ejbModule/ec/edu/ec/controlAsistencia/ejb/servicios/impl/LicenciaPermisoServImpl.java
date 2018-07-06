@@ -10,7 +10,7 @@ import javax.persistence.Query;
 import ec.edu.uce.controlAsistencia.jpa.entidades.LicenciaYPermiso;
 ;
 
-public class LicenciaPermiso implements ec.edu.uce.controlAsistencia.ejb.servicios.interfaces.LicenciaPermiso {
+public class LicenciaPermisoServImpl implements ec.edu.uce.controlAsistencia.ejb.servicios.interfaces.LicenciaPermisoServicio {
 	
 	
 	@PersistenceContext(unitName="ec.edu.uce.controlAsistencia.jpa")
