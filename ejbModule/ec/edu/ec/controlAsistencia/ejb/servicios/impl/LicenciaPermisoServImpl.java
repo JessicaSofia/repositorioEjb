@@ -3,13 +3,14 @@ package ec.edu.ec.controlAsistencia.ejb.servicios.impl;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import ec.edu.uce.controlAsistencia.jpa.entidades.LicenciaYPermiso;
 ;
-
+@Stateless
 public class LicenciaPermisoServImpl implements ec.edu.uce.controlAsistencia.ejb.servicios.interfaces.LicenciaPermisoServicio {
 	
 	
