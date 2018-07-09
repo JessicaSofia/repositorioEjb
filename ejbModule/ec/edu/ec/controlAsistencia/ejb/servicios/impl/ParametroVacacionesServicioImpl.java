@@ -15,6 +15,7 @@ public class ParametroVacacionesServicioImpl implements ParametroVacacionesServi
 	@PersistenceContext(unitName="ec.edu.uce.controlAsistencia.jpa")
 	private EntityManager em;
 	
+	
 	@Override
 	public ParametroVacacionRegimen buscarPorId(int prvcId, int rgmId) {
 		ParametroVacacionRegimen  retorno=null;
