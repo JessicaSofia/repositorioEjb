@@ -4,7 +4,8 @@ public enum ParametrosVacacion {
 
 	NumDiasxAño(1),
 	NumDiasConFinSemana(2),
-	AñoAcumulador(3);
+	AñoAcumulador(3),
+	NumMaxDiasAnticipados(4); 
 	
 	
 	private final int id;

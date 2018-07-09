@@ -51,5 +51,12 @@ public interface VacacionServicio  {
 	 * @return
 	 */
 	 public SaldoVacacion  ActualizarSaldoVacacion(SaldoVacacion saldoVacacion); 
+	 
+	 /**
+	  * Insercion de de un objeto de tipo Saldo Vacacion 
+	  * @param saldoVacacion
+	  * @return
+	  */
+	 public boolean SaldoVacacionInsertar(SaldoVacacion  saldoVacacion );
 }
   

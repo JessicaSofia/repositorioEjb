@@ -135,11 +135,11 @@ public class VacacionServicioImpl implements  VacacionServicio {
 					Query q = em.createQuery(sbsql.toString(), SaldoVacacion.class);
 					q.setParameter("periodo",periodo);
 					q.setParameter("dtpsId", dtpsId);
-					saldoVacacionPeriodo = (SaldoVacacion) q.getSingleResult();
+					saldoVacacionPeriodo=(SaldoVacacion) q.getSingleResult();
 						
 					
 				}catch(Exception e){
-					throw  e;      
+					return null;      
 					
 				}
 		 return saldoVacacionPeriodo;
@@ -154,6 +154,19 @@ public class VacacionServicioImpl implements  VacacionServicio {
 			 
 		}catch (Exception e) {
 			// TODO: handle exception
+		}
+		return retorno;
+	}
+
+	@Override
+	public boolean SaldoVacacionInsertar(SaldoVacacion saldoVacacion) {
+		boolean retorno = false;
+		try {
+			em.persist(saldoVacacion);
+			retorno= true;
+		}catch (Exception e) {
+			throw e;
+	
 		}
 		return retorno;
 	}
