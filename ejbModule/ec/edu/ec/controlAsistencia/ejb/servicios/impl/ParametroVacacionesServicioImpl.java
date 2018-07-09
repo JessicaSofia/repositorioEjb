@@ -28,6 +28,7 @@ public class ParametroVacacionesServicioImpl implements ParametroVacacionesServi
 			sbsql.append("Select pvr from ParametroVacacionRegimen pvr  ");
 			sbsql.append(" where pvr.parametroVacaciones.prvcId= :prvcId");
 			sbsql.append("and pvr.regimen.rgmId= :rgmId");
+			
 			 
 			Query q = em.createQuery(sbsql.toString());
 			q.setParameter("prvcId",prvcId);
