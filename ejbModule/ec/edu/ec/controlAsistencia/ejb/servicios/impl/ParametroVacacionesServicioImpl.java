@@ -23,16 +23,13 @@ public class ParametroVacacionesServicioImpl implements ParametroVacacionesServi
 		try {
 			
 			StringBuffer sbsql = new StringBuffer();
-//			sbsql.append(" Select pvr.parametroVacaciones.prvcId, pvr.regimen.rgmId, pvr.prvcrgValor   from ParametroVacacionRegimen pvr");
-//			sbsql.append(" where pvr.parametroVacaciones.prvcId= :prvcId");
-//			sbsql.append(" pvr.regimen.rgmId= :rgmId");
 			
-			sbsql.append("Select pvr from ParametroVacacionRegimen pvr  ");
-			sbsql.append(" where pvr.parametroVacaciones.prvcId= :prvcId");
-			sbsql.append("and pvr.regimen.rgmId= :rgmId");
+			sbsql.append("select pvr from ParametroVacacionRegimen pvr where ");
+			sbsql.append(" pvr.parametroVacaciones.prvcId = :prvcId");
+			sbsql.append(" and pvr.regimen.rgmId = :rgmId");
 			
 			 
-			Query q = em.createQuery(sbsql.toString());
+			Query q = em.createQuery(sbsql.toString(),ParametroVacacionRegimen.class);
 			q.setParameter("prvcId",prvcId);
 			q.setParameter("rgmId", rgmId);
 			retorno =(ParametroVacacionRegimen) q.getSingleResult();
