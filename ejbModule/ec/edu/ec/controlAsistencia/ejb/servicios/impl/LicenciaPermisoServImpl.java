@@ -1,5 +1,6 @@
 package ec.edu.ec.controlAsistencia.ejb.servicios.impl;
 
+
 import java.util.Calendar;
 import java.util.List;
 
@@ -9,14 +10,24 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import ec.edu.uce.controlAsistencia.jpa.entidades.LicenciaYPermiso;
-;
+
 @Stateless
 public class LicenciaPermisoServImpl implements ec.edu.uce.controlAsistencia.ejb.servicios.interfaces.LicenciaPermisoServicio {
 	
+	public LicenciaPermisoServImpl() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	@PersistenceContext(unitName="ec.edu.uce.controlAsistencia.jpa")
 	private EntityManager em;
 
+	/*@Resource(lookup = "java:/talentoHumanoDS")
+	private DataSource ds;
+	/*variables*/
+	
+	
+	
+	
 	@Override
 	public boolean LicenciaPermisoInsertar(LicenciaYPermiso licenciaPermiso) {
 		
@@ -32,24 +43,40 @@ public class LicenciaPermisoServImpl implements ec.edu.uce.controlAsistencia.ejb
 		return retorno;
 	}
 
-	@Override
-	public List<LicenciaYPermiso> ListaLicenciaYPermisoPorDetallePuestoId(int detallePuestoId) {
-		List<LicenciaYPermiso> retorno = null;
+
+	/*public List<LicenciaDto> ListaLicenciaYPermisoPorDetallePuestoId(int detallePuestoId) {
+		List<LicenciaDto> licencias = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		Connection con = null;
+		ResultSet rs = null;
+		
 		try{
-		StringBuffer sbsql = new StringBuffer();
-		sbsql.append(" Select lp from LicenciaYPermiso lp where");
-		sbsql.append(" lp.detallePuesto.dtpsId = :detallePuestoId");
-		Query q = em.createQuery(sbsql.toString());
-		q.setParameter("detallePuestoId",detallePuestoId);
-		retorno = (List<LicenciaYPermiso>)q.getResultList();
+		StringBuffer sql = new StringBuffer();
+		sql.append("select * from Licencia_Y_Permiso where dtps_id="+detallePuestoId);
+		sql.append(" lp.detallePuesto.dtpsId = ? ");
+
+		con = ds.getConnection();
+
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1,detallePuestoId);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				
+				LicenciaDto licencia = new LicenciaDto();
+				
+				licencia.setLcprFechaEmision(rs.getTimestamp(5));
+				licencias.add(licencia);
+			}
 		
 		}catch(Exception  e){
-			throw  e; 
+			e.printStackTrace();
 		}
 		
-		return retorno;
+		return licencias;
 
-	}
+	}*/
+	
 
 	@Override
 	public LicenciaYPermiso LicenciaYPermisoActualizar(LicenciaYPermiso licenciaYPermiso) {
@@ -83,6 +110,25 @@ public class LicenciaPermisoServImpl implements ec.edu.uce.controlAsistencia.ejb
 				}
 		
 		 		return numMaxima;
+	}
+
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<LicenciaYPermiso> ListaLicenciaYPermisoPorDetallePuestoId(int detallePuestoId) {
+		List<LicenciaYPermiso> listaLicenciaPermiso = null;
+		try{
+		StringBuffer sbsql = new StringBuffer();
+		sbsql.append("Select lp from LicenciaYPermiso lp where");
+		sbsql.append(" lp.detallePuesto.dtpsId = :detallePuestoId");
+		Query q = em.createQuery(sbsql.toString());
+		q.setParameter("detallePuestoId",detallePuestoId);
+		listaLicenciaPermiso = (List<LicenciaYPermiso>)q.getResultList();
+
+		}catch(Exception  e){
+			throw  e; 
+		}
+		return listaLicenciaPermiso;
 	}
 
 }

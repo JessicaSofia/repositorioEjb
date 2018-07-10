@@ -63,6 +63,7 @@ public class PersonaServicioImpl implements PersonaServicio {
             Object[] obj = (Object[]) itr.next();
             p = new PersonaDto(Integer.parseInt(String.valueOf(obj[0])),String.valueOf(obj[1]),String.valueOf(obj[2]).trim(),String.valueOf(obj[3]),String.valueOf(obj[4]),
             Integer.parseInt(String.valueOf(obj[5])),Integer.parseInt(String.valueOf(obj[6])),Integer.parseInt(String.valueOf(obj[7])), Integer.parseInt(String.valueOf(obj[8])),Integer.parseInt(String.valueOf(obj[9])),Integer.parseInt(String.valueOf(obj[10])));
+            
             persona.add(p);
         }
 		}catch(Exception  e){

@@ -13,9 +13,14 @@ import ec.edu.uce.controlAsistencia.jpa.entidades.TipoLicencia;
 public class TipoLicenciaServImpl
 		implements ec.edu.uce.controlAsistencia.ejb.servicios.interfaces.TipoLicenciaServicio {
 
+	public TipoLicenciaServImpl() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	@PersistenceContext(unitName = "ec.edu.uce.controlAsistencia.jpa")
 	private EntityManager em;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TipoLicencia> listarTipoLicencia() {
 		List<TipoLicencia> listaTipoLicencias = null;
