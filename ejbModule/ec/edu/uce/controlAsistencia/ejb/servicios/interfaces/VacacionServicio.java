@@ -58,5 +58,11 @@ public interface VacacionServicio  {
 	  * @return
 	  */
 	 public boolean SaldoVacacionInsertar(SaldoVacacion  saldoVacacion );
+	 
+	 /**
+	  * Obtiene el numero de registro de la tabla saldo vacacion asociado un funcionario
+	  */
+	 
+	 public int contarRegistros(int dtpsId);
 }
   

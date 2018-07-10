@@ -171,6 +171,28 @@ public class VacacionServicioImpl implements  VacacionServicio {
 		return retorno;
 	}
 
+	@Override
+	public int contarRegistros(int dtpsId) {
+		int resultado=0;
+		 try{
+			   StringBuffer sbsql = new StringBuffer();
+				sbsql.append(" select count(svc) from SaldoVacacion  svc");
+				sbsql.append(" WHERE svc.detallePuesto.dtpsId= :dtpsId)");
+				sbsql.append(" AND  svc.slvcEstado = 1)");
+				Query q = em.createQuery(sbsql.toString(), SaldoVacacion.class);
+				q.setParameter("dtpsId", dtpsId);
+				resultado = (int) q.getSingleResult();
+				
+			}catch(Exception e){
+				  
+				throw  e; 
+			}
+		
+		return resultado;
+	}
+	
+	
+
 	
 
 	
