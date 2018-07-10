@@ -6,7 +6,7 @@ public class PersonaDto  implements Serializable {
 	
 	
 	/**
-	 * 
+	 * jessica
 	 */
 	private static final long serialVersionUID = 1L;
 	private int prsId;

@@ -15,7 +15,7 @@ public class ContratoServicioImpl implements ContratoServicio {
 	private EntityManager em;
     
 	
-	
+	// aplicacion
 	@Override
 	public Contrato obtenerporDetallePuestoId(int dtpsId) {
 	Contrato retorno=null;
