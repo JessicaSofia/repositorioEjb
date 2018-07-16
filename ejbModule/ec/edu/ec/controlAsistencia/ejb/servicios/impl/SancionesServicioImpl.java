@@ -1,5 +1,6 @@
 package ec.edu.ec.controlAsistencia.ejb.servicios.impl;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -93,7 +94,7 @@ public class SancionesServicioImpl implements SancionesServicio {
 		List<Falta> retorno = null;
 		try{
 		StringBuffer sbsql = new StringBuffer();
-		sbsql.append(" Select sn from Sancion sn");
+		sbsql.append(" Select fl from Falta fl");
 		Query q = em.createQuery(sbsql.toString());
 		retorno = ((List<Falta>)q.getResultList());
 	
@@ -128,6 +129,52 @@ public class SancionesServicioImpl implements SancionesServicio {
 		
 		return retorno;
 	
+	}
+
+	@Override
+	public int MaximaNumAutorizacion() {
+		 int  numMaxima=0;
+		 try{
+			 
+			 Calendar fechaFinal = Calendar.getInstance();
+			 int anioactual=fechaFinal.get(Calendar.YEAR);
+				StringBuffer sbsql = new StringBuffer();
+				sbsql.append(" select  case when Max(dtpssn.dtpssnNumaccion) is null then 0 else Max(dtpssn.dtpssnNumaccion)  end from DetallePuestoSancion  dtpssn");
+				sbsql.append(" WHERE   year(dtpssn.dtpssnFechaEmision) = :anioActual)");
+				sbsql.append(" AND dtpssn.dtpssnEstado=1");
+				Query q = em.createQuery(sbsql.toString());
+				q.setParameter("anioActual",anioactual);
+				numMaxima = (int) q.getSingleResult();
+				
+				}catch(Exception  e){
+					throw  e; 
+				}
+		
+		 		return numMaxima;
+	
+	}
+
+	@Override
+	public Falta ObtenerFaltaPorI(int flId) {
+		Falta retorno=null;
+		try {
+			retorno =  em.find(Falta.class, flId);
+		}catch (Exception e) {
+			throw e;
+		}
+		return retorno;
+	}
+
+	@Override
+	public Sancion ObtenerSancionPorId(int snId) {
+
+		Sancion retorno=null;
+		try {
+			retorno =  em.find(Sancion.class, snId);
+		}catch (Exception e) {
+			throw e;
+		}
+		return retorno;
 	}
 
 }

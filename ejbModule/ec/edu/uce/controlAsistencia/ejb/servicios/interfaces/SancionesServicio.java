@@ -42,9 +42,33 @@ public interface SancionesServicio {
 	 */
 	public List<Falta> listarFalta();
 	
-	
+	/**
+	 * Lista todos por parametros por CategoriaId y  faltaId
+	 * @param ctgId
+	 * @param ftId
+	 * @return
+	 */
 	public List<CategoriaFalta> listarcategoriaFaltaPorCategoriaIdFaltaId(int ctgId, int ftId);
 	
+	/**
+	 * Genera el  numero de Accion 
+	 * @return
+	 */
+	public int MaximaNumAutorizacion();
+	
+	/**
+	 * Obtine la entidad falta por FaltaId
+	 * @param flId
+	 * @return
+	 */
+	public Falta  ObtenerFaltaPorI(int flId);
+	
+	/**
+	 * Obtiene una entidad de tipo Sancion por SancionId
+	 * @param snId
+	 * @return
+	 */
+	public Sancion ObtenerSancionPorId(int snId);
 	
 	
 }
