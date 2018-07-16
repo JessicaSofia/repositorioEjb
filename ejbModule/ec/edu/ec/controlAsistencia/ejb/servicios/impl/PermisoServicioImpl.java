@@ -13,12 +13,11 @@ import ec.edu.uce.controlAsistencia.jpa.entidades.Permiso;
 @Stateless
 public class PermisoServicioImpl implements PermisoServicio {
 
-	
-	public PermisoServicioImpl(){
-		
+	public PermisoServicioImpl() {
+
 	}
-	
-	@PersistenceContext(unitName="ec.edu.uce.controlAsistencia.jpa")
+
+	@PersistenceContext(unitName = "ec.edu.uce.controlAsistencia.jpa")
 	private EntityManager em;
 
 	@SuppressWarnings("unchecked")
@@ -26,19 +25,43 @@ public class PermisoServicioImpl implements PermisoServicio {
 	public List<Permiso> ListaPermisoPorDetallePuestoId(int detallePuestoId) {
 		System.out.println(detallePuestoId);
 		List<Permiso> listaPermiso = null;
-		try{
-		StringBuffer sbsql = new StringBuffer();
-		sbsql.append("Select lp from Permiso lp where");
-		sbsql.append(" lp.detallePuesto.dtpsId = :detallePuestoId");
-		Query q = em.createQuery(sbsql.toString());
-		q.setParameter("detallePuestoId",detallePuestoId);
-		listaPermiso = (List<Permiso>)q.getResultList();
+		try {
+			StringBuffer sbsql = new StringBuffer();
+			sbsql.append("Select lp from Permiso lp where");
+			sbsql.append(" lp.detallePuesto.dtpsId = :detallePuestoId");
+			Query q = em.createQuery(sbsql.toString());
+			q.setParameter("detallePuestoId", detallePuestoId);
+			listaPermiso = (List<Permiso>) q.getResultList();
 
-		}catch(Exception  e){
-			throw  e; 
+		} catch (Exception e) {
+			throw e;
 		}
 		return listaPermiso;
 	}
 
-	
+	@Override
+	public boolean InsertarPermiso(Permiso permiso) {
+		boolean retorno = false;
+		try {
+			em.persist(permiso);
+			retorno = true;
+
+		} catch (Exception e) {
+			throw e;
+
+		}
+		return retorno;
+	}
+
+	@Override
+	public Permiso ActualizarPermiso(Permiso permiso) {
+		Permiso retorno = null;
+		try{
+			retorno= em.merge(permiso);
+		}catch (Exception e) {
+			throw e;
+		}
+		return retorno;
+	}
+
 }

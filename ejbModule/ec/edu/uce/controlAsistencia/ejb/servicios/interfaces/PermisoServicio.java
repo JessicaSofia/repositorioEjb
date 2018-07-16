@@ -13,6 +13,15 @@ public interface PermisoServicio {
 	 */
 	public List<Permiso> ListaPermisoPorDetallePuestoId(int  detallePuestoId );
 	
+	/**
+	 * Insertar un objeto Permiso
+	 */
+	public boolean InsertarPermiso(Permiso permiso);
 	
-
+	/**
+	 * Actualiza un objeto Permiso
+	 */
+	public Permiso ActualizarPermiso(Permiso permiso);
+	
+	
 }
