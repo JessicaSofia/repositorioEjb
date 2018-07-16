@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import ec.edu.uce.controlAsistencia.jpa.entidades.Licencia;
 import ec.edu.uce.controlAsistencia.jpa.entidades.TipoLicencia;
 
 @Stateless
@@ -26,7 +27,7 @@ public class TipoLicenciaServImpl
 		List<TipoLicencia> listaTipoLicencias = null;
 		try {
 			StringBuffer sbsql = new StringBuffer();
-			sbsql.append("select tp from TipoLicencia tp");
+			sbsql.append("select tp from TipoLicencia tp where tp.tplcPadre = 0");
 			Query q = em.createQuery(sbsql.toString());
 			listaTipoLicencias = (List<TipoLicencia>) q.getResultList();
 		} catch (Exception e) {
@@ -44,6 +45,23 @@ public class TipoLicenciaServImpl
 			throw e;
 		}
 		return tipoLicencia;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TipoLicencia> buscarTipoLicenciaPorPadre(int id_padre) {
+		List<TipoLicencia> listaTipoLicencia = null;
+		try{
+			StringBuffer sbsql = new StringBuffer();
+			sbsql.append("select tp from TipoLicencia tp where");
+			sbsql.append(" tp.tplcPadre = :id_padre");
+			Query q = em.createQuery(sbsql.toString());
+			q.setParameter("id_padre",id_padre);
+			listaTipoLicencia = (List<TipoLicencia>)q.getResultList();
+		}catch (Exception e) {
+			throw e;
+		}
+		return listaTipoLicencia;
 	}
 
 }
