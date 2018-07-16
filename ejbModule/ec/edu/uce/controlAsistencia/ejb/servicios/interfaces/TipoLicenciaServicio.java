@@ -19,4 +19,9 @@ public interface TipoLicenciaServicio {
 	 */
 	public TipoLicencia buscarTipoLicenciaPorId(int id_tipo_licencia);
 
+	/**
+	 * Obtiene la lista de los hijos, dado el padre
+	 * 
+	 */
+	public List<TipoLicencia> buscarTipoLicenciaPorPadre(int id_padre);
 }
