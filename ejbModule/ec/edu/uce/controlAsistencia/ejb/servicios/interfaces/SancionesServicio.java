@@ -70,5 +70,10 @@ public interface SancionesServicio {
 	 */
 	public Sancion ObtenerSancionPorId(int snId);
 	
-	
+	/**
+	 *Obtiene una lista de sanciones por el TipoSancionId 
+	 * @param tpSnId
+	 * @return
+	 */
+	public List<Sancion>  ObtenerLstSancionPorTipoSancionId(int tpSnId);
 }

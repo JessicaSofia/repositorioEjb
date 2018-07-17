@@ -177,4 +177,26 @@ public class SancionesServicioImpl implements SancionesServicio {
 		return retorno;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Sancion> ObtenerLstSancionPorTipoSancionId(int tpSnId) {
+		List<Sancion> retorno = null;
+		try{
+		StringBuffer sbsql = new StringBuffer();
+		sbsql.append(" Select sn from Sancion sn  where");
+		sbsql.append(" sn.tipoSancion.tpsnId= :tpSnId");
+		Query q = em.createQuery(sbsql.toString());
+		q.setParameter("tpSnId",  tpSnId);
+		retorno = (List<Sancion>)q.getResultList();
+	
+		}catch(Exception  e){
+			throw  e; 
+		}
+		
+		return retorno;
+	
+		
+
+	}
+
 }
