@@ -41,7 +41,7 @@ public class VacacionServicioImpl implements  VacacionServicio {
 			retorno= true;
 			
 		}catch(Exception  e){
-			throw e;
+			return false;
 			                                        
 		}
 		return retorno;
