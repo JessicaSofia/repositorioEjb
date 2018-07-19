@@ -2,7 +2,9 @@ package ec.edu.uce.controlAsistencia.ejb.servicios.interfaces;
 
 import java.util.List;
 
+import ec.edu.uce.controlAsistencia.jpa.entidades.DetallePuestoSancion;
 import ec.edu.uce.controlAsistencia.jpa.entidades.SaldoVacacion;
+import ec.edu.uce.controlAsistencia.jpa.entidades.Sancion;
 import ec.edu.uce.controlAsistencia.jpa.entidades.Vacacion;
 
 public interface VacacionServicio  {
@@ -64,5 +66,15 @@ public interface VacacionServicio  {
 	  */
 	 
 	 public int contarRegistros(int dtpsId);
+	 
+	
+	/**
+	 * Obtiene una  lista de Vacaciones filtrado por Mes y Año
+	 * @param mes
+	 * @param anio
+	 * @return
+	 */
+	 public List<Vacacion> ObtenerLstDtSancionesPorAnioMes(int mes, int anio);
+		
 }
   

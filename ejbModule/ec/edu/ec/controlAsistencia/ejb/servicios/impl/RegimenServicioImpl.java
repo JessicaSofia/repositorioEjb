@@ -1,10 +1,15 @@
 package ec.edu.ec.controlAsistencia.ejb.servicios.impl;
 
 import ec.edu.uce.controlAsistencia.ejb.servicios.interfaces.RegimenServicio;
+import ec.edu.uce.controlAsistencia.jpa.entidades.Dependencia;
 import ec.edu.uce.controlAsistencia.jpa.entidades.Regimen;
+
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  * Session Bean implementation class RegimenServicioImpl
@@ -38,5 +43,23 @@ public class RegimenServicioImpl implements RegimenServicio {
        return regimen;
 			
     }
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Regimen> ObtenerLstTodos() {
+		List<Regimen> retorno = null;
+		try{
+		StringBuffer sbsql = new StringBuffer();
+		sbsql.append(" Select rg from Regimen rg");
+		Query q = em.createQuery(sbsql.toString());
+	
+		retorno = (List<Regimen>)q.getResultList();
+		
+		}catch(Exception  e){
+			throw  e; 
+		}
+		
+		return retorno;
+	}
 
 }

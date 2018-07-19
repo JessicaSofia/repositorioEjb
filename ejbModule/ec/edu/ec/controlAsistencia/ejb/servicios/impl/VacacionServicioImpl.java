@@ -190,6 +190,28 @@ public class VacacionServicioImpl implements  VacacionServicio {
 		
 		return resultado;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Vacacion> ObtenerLstDtSancionesPorAnioMes(int mes, int anio) {
+		List<Vacacion> retorno = null;
+		try{
+		StringBuffer sbsql = new StringBuffer();
+		sbsql.append(" Select vc from Vacacion vc where");
+		sbsql.append(" year(vc.vccFechaInicio) = :anio ");
+		sbsql.append(" and month(vc.vccFechaInicio)= :mes");
+		Query q = em.createQuery(sbsql.toString());
+		q.setParameter("anio",anio);
+		q.setParameter("mes",mes);
+		retorno = (List<Vacacion>)q.getResultList();
+		
+		}catch(Exception  e){
+			throw  e; 
+		}
+		
+		return retorno;
+	
+	}
 	
 	
 

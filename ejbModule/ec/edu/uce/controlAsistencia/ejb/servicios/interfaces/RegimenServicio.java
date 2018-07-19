@@ -1,5 +1,7 @@
 package ec.edu.uce.controlAsistencia.ejb.servicios.interfaces;
 
+import java.util.List;
+
 import ec.edu.uce.controlAsistencia.jpa.entidades.Regimen;
 
 public interface RegimenServicio {
@@ -10,4 +12,6 @@ public interface RegimenServicio {
 	 * @return
 	 */
 	public Regimen BuscarPorId(int id);
+	
+	public List<Regimen> ObtenerLstTodos();
 }

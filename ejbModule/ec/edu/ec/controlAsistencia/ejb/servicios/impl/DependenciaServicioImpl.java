@@ -1,14 +1,16 @@
 package ec.edu.ec.controlAsistencia.ejb.servicios.impl;
 
-import ec.edu.uce.controlAsistencia.ejb.datos.DependenciaDto;
 import ec.edu.uce.controlAsistencia.ejb.servicios.interfaces.DependenciaServicio;
 import ec.edu.uce.controlAsistencia.jpa.entidades.Dependencia;
 
-import javax.ejb.Local;
-import javax.ejb.LocalBean;
+
+import java.util.List;
+
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  * Session Bean implementation class DependenciaServicioImpl
@@ -41,5 +43,23 @@ public class DependenciaServicioImpl implements DependenciaServicio {
     	return dependencia;
 			
     }
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Dependencia> obtenerListTodo() {
+		List<Dependencia> retorno = null;
+		try{
+		StringBuffer sbsql = new StringBuffer();
+		sbsql.append(" Select dp from Dependencia dp");
+		Query q = em.createQuery(sbsql.toString());
+	
+		retorno = (List<Dependencia>)q.getResultList();
+		
+		}catch(Exception  e){
+			throw  e; 
+		}
+		
+		return retorno;
+	}
 
 }
