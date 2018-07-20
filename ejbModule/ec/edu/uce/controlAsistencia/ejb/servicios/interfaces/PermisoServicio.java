@@ -24,4 +24,7 @@ public interface PermisoServicio {
 	public Permiso ActualizarPermiso(Permiso permiso);
 	
 	
+	public List<Permiso> obtenerLstPorAniomes(int anio,  int mes);
+	
+	
 }

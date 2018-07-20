@@ -74,7 +74,7 @@ public interface VacacionServicio  {
 	 * @param anio
 	 * @return
 	 */
-	 public List<Vacacion> ObtenerLstDtSancionesPorAnioMes(int mes, int anio);
+	 public List<Vacacion> ObtenerLstPorAnioMes(int mes, int anio);
 		
 }
   

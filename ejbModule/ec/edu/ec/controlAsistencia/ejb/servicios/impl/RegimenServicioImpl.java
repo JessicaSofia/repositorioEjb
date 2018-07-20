@@ -1,7 +1,6 @@
 package ec.edu.ec.controlAsistencia.ejb.servicios.impl;
 
 import ec.edu.uce.controlAsistencia.ejb.servicios.interfaces.RegimenServicio;
-import ec.edu.uce.controlAsistencia.jpa.entidades.Dependencia;
 import ec.edu.uce.controlAsistencia.jpa.entidades.Regimen;
 
 import java.util.List;

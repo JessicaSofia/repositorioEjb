@@ -193,7 +193,7 @@ public class VacacionServicioImpl implements  VacacionServicio {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Vacacion> ObtenerLstDtSancionesPorAnioMes(int mes, int anio) {
+	public List<Vacacion> ObtenerLstPorAnioMes(int mes, int anio) {
 		List<Vacacion> retorno = null;
 		try{
 		StringBuffer sbsql = new StringBuffer();

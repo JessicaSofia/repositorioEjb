@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import ec.edu.uce.controlAsistencia.jpa.entidades.Licencia;
+import ec.edu.uce.controlAsistencia.jpa.entidades.Vacacion;
 
 @Stateless
 public class LicenciaServImpl implements ec.edu.uce.controlAsistencia.ejb.servicios.interfaces.LicenciaServicio {
@@ -95,6 +96,29 @@ public class LicenciaServImpl implements ec.edu.uce.controlAsistencia.ejb.servic
 			throw  e; 
 		}
 		return listaLicencia;
+	}
+
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Licencia> ObtenerLstPorAnioMes(int anio, int mes) {
+		List<Licencia> retorno = null;
+		try{
+		StringBuffer sbsql = new StringBuffer();
+		sbsql.append(" Select lc from Licencia lc where");
+		sbsql.append(" year(lc.lcnFechaInicio) = :anio ");
+		sbsql.append(" and month(lc.lcnFechaInicio)= :mes");
+		Query q = em.createQuery(sbsql.toString());
+		q.setParameter("anio",anio);
+		q.setParameter("mes",mes);
+		retorno = (List<Licencia>)q.getResultList();
+		
+		}catch(Exception  e){
+			throw  e; 
+		}
+		
+		return retorno;
+	
 	}
 
 }

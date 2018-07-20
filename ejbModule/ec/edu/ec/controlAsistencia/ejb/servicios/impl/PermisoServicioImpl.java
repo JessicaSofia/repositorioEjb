@@ -64,4 +64,25 @@ public class PermisoServicioImpl implements PermisoServicio {
 		return retorno;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Permiso> obtenerLstPorAniomes(int anio, int mes) {
+		List<Permiso> retorno = null;
+		try{
+		StringBuffer sbsql = new StringBuffer();
+		sbsql.append(" Select pr from Permiso pr where");
+		sbsql.append(" year(pr.prmHoraInicio) = :anio ");
+		sbsql.append(" and month(pr.prmHoraInicio)= :mes");
+		Query q = em.createQuery(sbsql.toString());
+		q.setParameter("anio",anio);
+		q.setParameter("mes",mes);
+		retorno = (List<Permiso>)q.getResultList();
+		
+		}catch(Exception  e){
+			throw  e; 
+		}
+		
+		return retorno;
+	}
+
 }

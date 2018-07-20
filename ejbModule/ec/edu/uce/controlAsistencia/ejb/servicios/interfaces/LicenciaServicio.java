@@ -34,5 +34,7 @@ public interface LicenciaServicio {
 	  * @return
 	  */
 	public int  MaximaNumAutorizacion();
+	
+	public List<Licencia> ObtenerLstPorAnioMes(int anio, int mes);
 
 }

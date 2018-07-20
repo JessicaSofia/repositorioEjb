@@ -11,14 +11,34 @@ public class ReporteAusencias  implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
 	private int numAccion;
 	private String nombres;
 	private Timestamp fechaEmision;
 	private Date fechaInicio;
 	private Date fechaFinal;
+	private String Observacion;
+	private String conCopia;
+	private int Estado;
 	private String dependencia;
 	private String regimen;
+	
+	
+	
+	
+	public ReporteAusencias(int numAccion, String nombres, Timestamp fechaEmision, Date fechaInicio, Date fechaFinal,
+			String observacion, String conCopia, int estado, String dependencia, String regimen) {
+		super();
+		this.numAccion = numAccion;
+		this.nombres = nombres;
+		this.fechaEmision = fechaEmision;
+		this.fechaInicio = fechaInicio;
+		this.fechaFinal = fechaFinal;
+		Observacion = observacion;
+		this.conCopia = conCopia;
+		Estado = estado;
+		this.dependencia = dependencia;
+		this.regimen = regimen;
+	}
 	public int getNumAccion() {
 		return numAccion;
 	}
@@ -60,6 +80,24 @@ public class ReporteAusencias  implements Serializable{
 	}
 	public void setRegimen(String regimen) {
 		this.regimen = regimen;
+	}
+	public String getObservacion() {
+		return Observacion;
+	}
+	public void setObservacion(String observacion) {
+		Observacion = observacion;
+	}
+	public String getConCopia() {
+		return conCopia;
+	}
+	public void setConCopia(String conCopia) {
+		this.conCopia = conCopia;
+	}
+	public int getEstado() {
+		return Estado;
+	}
+	public void setEstado(int estado) {
+		Estado = estado;
 	}
 
 	
