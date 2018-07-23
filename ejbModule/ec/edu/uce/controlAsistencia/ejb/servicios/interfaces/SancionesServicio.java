@@ -6,6 +6,7 @@ import ec.edu.uce.controlAsistencia.jpa.entidades.CategoriaFalta;
 import ec.edu.uce.controlAsistencia.jpa.entidades.DetallePuestoSancion;
 import ec.edu.uce.controlAsistencia.jpa.entidades.Falta;
 import ec.edu.uce.controlAsistencia.jpa.entidades.Sancion;
+import ec.edu.uce.controlAsistencia.jpa.entidades.TipoSancion;
 
 public interface SancionesServicio {
 	
@@ -77,6 +78,9 @@ public interface SancionesServicio {
 	 */
 	public List<Sancion>  ObtenerLstSancionPorTipoSancionId(int tpSnId);
 	
+	
+	
+	public List<TipoSancion> ObtenerLstTipoSancionTodo();
 	
 	
 	

@@ -13,6 +13,7 @@ import ec.edu.uce.controlAsistencia.jpa.entidades.CategoriaFalta;
 import ec.edu.uce.controlAsistencia.jpa.entidades.DetallePuestoSancion;
 import ec.edu.uce.controlAsistencia.jpa.entidades.Falta;
 import ec.edu.uce.controlAsistencia.jpa.entidades.Sancion;
+import ec.edu.uce.controlAsistencia.jpa.entidades.TipoSancion;
 
 
 @Stateless
@@ -196,6 +197,26 @@ public class SancionesServicioImpl implements SancionesServicio {
 		return retorno;
 	
 		
+
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TipoSancion> ObtenerLstTipoSancionTodo() {
+	
+		List<TipoSancion> retorno = null;
+		try{
+		StringBuffer sbsql = new StringBuffer();
+		sbsql.append(" Select tp from TipoSancion tp");
+		Query q = em.createQuery(sbsql.toString());
+		retorno = (List<TipoSancion>)q.getResultList();
+	
+		}catch(Exception  e){
+			throw  e; 
+		}
+		
+		return retorno;
+	
 
 	}
 
