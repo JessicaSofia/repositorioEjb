@@ -79,8 +79,54 @@ public interface SancionesServicio {
 	public List<Sancion>  ObtenerLstSancionPorTipoSancionId(int tpSnId);
 	
 	
-	
+	/**
+	 * Obtine una lista de todas los tipos de sanciones
+	 * @return
+	 */
 	public List<TipoSancion> ObtenerLstTipoSancionTodo();
+	
+	/**
+	 * Obtine un Lista de Sanciones
+	 * @return
+	 */
+	public List<DetallePuestoSancion> listarDtSancionTodos();
+	
+	/**
+	 * Obtiene una Lista de Sanciones Filtrado por  Año y Mes
+	 * @param anio
+	 * @param mes
+	 * @return
+	 */
+	public List<DetallePuestoSancion> listarDtSancionPorAnioMes(int anio, int mes);
+	
+	/**
+	 * Obtener una lista de DetallePuestosancion Filtrado por Año, Mes  y Regimen
+	 * @param anio
+	 * @param mes
+	 * @param rgmId
+	 * @return
+	 */
+	public List<DetallePuestoSancion> listarDtSancionPorAnioMesRegimenId(int anio, int mes, int rgmId);
+	
+	/**
+	 * Obtiene una Lista de DetallePuestoSancion Filtrado  por Año, Mes, Regimen y Tipo de Sancion 
+	 * @param anio
+	 * @param mes
+	 * @param rgmId
+	 * @param tpsnId
+	 * @return
+	 */
+	public List<DetallePuestoSancion> listarDtSancionPorAnioMesRegimenIdTipoSancionId(int  anio, int mes, int  rgmId, int  tpsnId);
+	
+	/**
+	 *  Obtiene una lista de DetallePuesto Sancion friltrado por Año, mes y tipo de Sancion
+	 * @param anio
+	 * @param mes
+	 * @param tpsnId
+	 * @return
+	 */
+	public List<DetallePuestoSancion> listarDtSancionPorAnioMesTipoSancionId(int anio, int  mes, int  tpsnId);
+	
 	
 	
 	
