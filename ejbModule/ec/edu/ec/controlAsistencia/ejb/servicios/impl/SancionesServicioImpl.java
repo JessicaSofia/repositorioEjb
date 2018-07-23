@@ -12,6 +12,7 @@ import ec.edu.uce.controlAsistencia.ejb.servicios.interfaces.SancionesServicio;
 import ec.edu.uce.controlAsistencia.jpa.entidades.CategoriaFalta;
 import ec.edu.uce.controlAsistencia.jpa.entidades.DetallePuestoSancion;
 import ec.edu.uce.controlAsistencia.jpa.entidades.Falta;
+import ec.edu.uce.controlAsistencia.jpa.entidades.Permiso;
 import ec.edu.uce.controlAsistencia.jpa.entidades.Sancion;
 import ec.edu.uce.controlAsistencia.jpa.entidades.TipoSancion;
 
@@ -217,6 +218,124 @@ public class SancionesServicioImpl implements SancionesServicio {
 		
 		return retorno;
 	
+
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<DetallePuestoSancion> listarDtSancionTodos() {
+		List<DetallePuestoSancion> retorno = null;
+		try{
+		StringBuffer sbsql = new StringBuffer();
+		sbsql.append(" Select dps from DetallePuestoSancion dps ");
+		Query q = em.createQuery(sbsql.toString());
+	
+		retorno = (List<DetallePuestoSancion>)q.getResultList();
+	
+		}catch(Exception  e){
+			throw  e; 
+		}
+		
+		return retorno;
+	
+
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<DetallePuestoSancion> listarDtSancionPorAnioMes(int anio, int mes) {
+		List<DetallePuestoSancion> retorno = null;
+		try{
+		StringBuffer sbsql = new StringBuffer();
+		sbsql.append(" Select dts from DetallePuestoSancion dts where");
+		sbsql.append("  dts.dtpssnAno = :anio ");
+		sbsql.append("  and dts.dtpssnMes= :mes");
+		Query q = em.createQuery(sbsql.toString());
+		q.setParameter("anio",anio);
+		q.setParameter("mes",mes);
+		retorno = (List<DetallePuestoSancion>)q.getResultList();
+		
+		}catch(Exception  e){
+			throw  e; 
+		}
+		
+		return retorno;
+	}
+		
+	
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<DetallePuestoSancion> listarDtSancionPorAnioMesRegimenId(int anio, int mes, int rgmId) {
+		List<DetallePuestoSancion> retorno = null;
+		try{
+		StringBuffer sbsql = new StringBuffer();
+		sbsql.append(" Select dts from DetallePuestoSancion dts where");
+		sbsql.append(" dts.dtpssnAno = :anio ");
+		sbsql.append(" and dts.dtpssnMes= :mes");
+		sbsql.append(" and dts.detallePuesto.puesto.grupoOcupacional.regimen.rgmId = :rgmId");
+		Query q = em.createQuery(sbsql.toString());
+		q.setParameter("anio",anio);
+		q.setParameter("mes",mes);
+		q.setParameter("rgmId",rgmId);
+		retorno = (List<DetallePuestoSancion>)q.getResultList();
+		
+		}catch(Exception  e){
+			throw  e; 
+		}
+		
+		return retorno;
+
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<DetallePuestoSancion> listarDtSancionPorAnioMesRegimenIdTipoSancionId(int anio, int mes, int rgmId,
+			int tpsnId) {
+		List<DetallePuestoSancion> retorno = null;
+		try{
+		StringBuffer sbsql = new StringBuffer();
+		sbsql.append(" Select dts from DetallePuestoSancion dts where");
+		sbsql.append(" dts.dtpssnAno = :anio ");
+		sbsql.append(" and dts.dtpssnMes= :mes");
+		sbsql.append(" and dts.detallePuesto.puesto.grupoOcupacional.regimen.rgmId = :rgmId");
+		sbsql.append(" and dts.sancion.tipoSancion.tpsnId = :tpsnId");
+		Query q = em.createQuery(sbsql.toString());
+		q.setParameter("anio",anio);
+		q.setParameter("mes",mes);
+		q.setParameter("rgmId",rgmId);
+		q.setParameter("tpsnId",tpsnId);
+		retorno = (List<DetallePuestoSancion>)q.getResultList();
+		
+		}catch(Exception  e){
+			throw  e; 
+		}
+		
+		return retorno;
+
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<DetallePuestoSancion> listarDtSancionPorAnioMesTipoSancionId(int anio, int mes, int tpsnId) {
+		List<DetallePuestoSancion> retorno = null;
+		try{
+		StringBuffer sbsql = new StringBuffer();
+		sbsql.append(" Select dts from DetallePuestoSancion dts where");
+		sbsql.append(" dts.dtpssnAno = :anio ");
+		sbsql.append(" and dts.dtpssnMes= :mes");
+		sbsql.append(" and dts.sancion.tipoSancion.tpsnId = :tpsnId");
+		Query q = em.createQuery(sbsql.toString());
+		q.setParameter("anio",anio);
+		q.setParameter("mes",mes);
+		q.setParameter("tpsnId",tpsnId);
+		retorno = (List<DetallePuestoSancion>)q.getResultList();
+		
+		}catch(Exception  e){
+			throw  e; 
+		}
+		
+		return retorno;
 
 	}
 
