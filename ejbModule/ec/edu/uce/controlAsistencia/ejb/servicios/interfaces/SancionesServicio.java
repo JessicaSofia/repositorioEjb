@@ -2,6 +2,7 @@ package ec.edu.uce.controlAsistencia.ejb.servicios.interfaces;
 
 import java.util.List;
 
+import ec.edu.uce.controlAsistencia.ejb.datos.ReporteSancion;
 import ec.edu.uce.controlAsistencia.jpa.entidades.CategoriaFalta;
 import ec.edu.uce.controlAsistencia.jpa.entidades.DetallePuestoSancion;
 import ec.edu.uce.controlAsistencia.jpa.entidades.Falta;
@@ -91,22 +92,7 @@ public interface SancionesServicio {
 	 */
 	public List<DetallePuestoSancion> listarDtSancionTodos();
 	
-	/**
-	 * Obtiene una Lista de Sanciones Filtrado por  Año y Mes
-	 * @param anio
-	 * @param mes
-	 * @return
-	 */
-	public List<DetallePuestoSancion> listarDtSancionPorAnioMes(int anio, int mes);
 	
-	/**
-	 * Obtener una lista de DetallePuestosancion Filtrado por Año, Mes  y Regimen
-	 * @param anio
-	 * @param mes
-	 * @param rgmId
-	 * @return
-	 */
-	public List<DetallePuestoSancion> listarDtSancionPorAnioMesRegimenId(int anio, int mes, int rgmId);
 	
 	/**
 	 * Obtiene una Lista de DetallePuestoSancion Filtrado  por Año, Mes, Regimen y Tipo de Sancion 
@@ -116,7 +102,7 @@ public interface SancionesServicio {
 	 * @param tpsnId
 	 * @return
 	 */
-	public List<DetallePuestoSancion> listarDtSancionPorAnioMesRegimenIdTipoSancionId(int  anio, int mes, int  rgmId, int  tpsnId);
+	public List<ReporteSancion> listarDtSancionPorAnioMesRegimenIdTipoSancionId(int  anio, int mes, int  rgmId, int  tpsnId);
 	
 	/**
 	 *  Obtiene una lista de DetallePuesto Sancion friltrado por Año, mes y tipo de Sancion
@@ -125,7 +111,20 @@ public interface SancionesServicio {
 	 * @param tpsnId
 	 * @return
 	 */
-	public List<DetallePuestoSancion> listarDtSancionPorAnioMesTipoSancionId(int anio, int  mes, int  tpsnId);
+	
+	
+	public List<ReporteSancion> listarDiasSancionesPorTpSancionIdFaltaId(int tpSnId, int flId, int anio, int mes);
+	
+	public List<ReporteSancion> listarDtSancionPorAnioMesTipoSancionId(int anio, int  mes, int  tpsnId);
+	
+	public List<ReporteSancion> listarDtSancionAnualPorAnioMes(int anioInicio, int mesInicio, int  anioFin, int mesFin);
+	
+	public List<ReporteSancion> listarDtSancionAnualPorAnioMesRegimenId(int anio, int mes,int rgmId);
+	 
+	public List<ReporteSancion> listarDtSancionAnualPorAnioMesRegimenIdTipoSancionId(int anio, int mes, int rgmId, int tpSnId );
+	       
+	public  List<ReporteSancion> listarDtSancionAnualPorAnioMesTipoSancionId(int anio, int mes, int topSnId);
+	
 	
 	
 	
