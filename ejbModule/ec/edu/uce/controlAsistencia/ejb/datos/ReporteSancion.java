@@ -1,6 +1,7 @@
 package ec.edu.uce.controlAsistencia.ejb.datos;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class ReporteSancion  implements Serializable {
 
@@ -22,6 +23,7 @@ public class ReporteSancion  implements Serializable {
 	private String dependencia;
 	private int frecuencia;
 	private String sancion;
+	private List<ReporteSancion> lstSanciones;
 	
 	
 	
@@ -53,7 +55,15 @@ public class ReporteSancion  implements Serializable {
 		this.dtpsId=dtpsId;
 	}
 	
-
+	public ReporteSancion(int dtpsId, String identificacion, String nombres, int frecuencia, String cargo, String dependencia) {
+		super();
+		this.identificacion = identificacion;
+		Nombres = nombres;
+		this.frecuencia = frecuencia;
+		this.cargo = cargo;
+		this.dependencia = dependencia;
+		this.dtpsId=dtpsId;
+	}
 
 	 public ReporteSancion(String falta, String dias) {
 		super();
@@ -61,7 +71,17 @@ public class ReporteSancion  implements Serializable {
 		this.dias = dias;
 	}
 
-
+	 public ReporteSancion(int dtpsId, String identificacion, String nombres, float valor, String cargo, String dependencia, List<ReporteSancion> faltas) {
+			super();
+			this.identificacion = identificacion;
+			Nombres = nombres;
+			this.valor = valor;
+			this.cargo = cargo;
+			this.dependencia = dependencia;
+			this.dtpsId=dtpsId;
+			this.lstSanciones=faltas;
+		}
+		
 	public ReporteSancion() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -151,6 +171,16 @@ public class ReporteSancion  implements Serializable {
 
 	public void setSancion(String sancion) {
 		this.sancion = sancion;
+	}
+
+
+	public List<ReporteSancion> getLstSanciones() {
+		return lstSanciones;
+	}
+
+
+	public void setLstSanciones(List<ReporteSancion> lstSanciones) {
+		this.lstSanciones = lstSanciones;
 	}
 	
 	

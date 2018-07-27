@@ -44,6 +44,9 @@ public interface SancionesServicio {
 	 */
 	public List<Falta> listarFalta();
 	
+	public Falta ObtenerFaltaPorNombre(String Nombre);
+	
+	
 	/**
 	 * Lista todos por parametros por CategoriaId y  faltaId
 	 * @param ctgId
@@ -104,6 +107,9 @@ public interface SancionesServicio {
 	 */
 	public List<ReporteSancion> listarDtSancionPorAnioMesRegimenIdTipoSancionId(int  anio, int mes, int  rgmId, int  tpsnId);
 	
+	public List<ReporteSancion> listarDtSancionPorAnioMesRegimenIdTipoSancionIdNoAgrupado(int  anio, int mes, int  rgmId, int  tpsnId);
+	
+	
 	/**
 	 *  Obtiene una lista de DetallePuesto Sancion friltrado por Año, mes y tipo de Sancion
 	 * @param anio
@@ -114,6 +120,8 @@ public interface SancionesServicio {
 	
 	
 	public List<ReporteSancion> listarDiasSancionesPorTpSancionIdFaltaId(int tpSnId, int flId, int anio, int mes);
+	public String DiasSancionPorTpSancionIdFaltaId(int tpSnId, int flId, int dtpsId, int anio, int mes);
+	
 	
 	public List<ReporteSancion> listarDtSancionPorAnioMesTipoSancionId(int anio, int  mes, int  tpsnId);
 	
@@ -121,7 +129,7 @@ public interface SancionesServicio {
 	
 	public List<ReporteSancion> listarDtSancionAnualPorAnioMesRegimenId(int anio, int mes,int rgmId);
 	 
-	public List<ReporteSancion> listarDtSancionAnualPorAnioMesRegimenIdTipoSancionId(int anio, int mes, int rgmId, int tpSnId );
+	public List<ReporteSancion> listarDtSancionAnualPorAnioMesRegimenIdTipoSancionId(int anio, int mes, int rgmId, int tpSnId, int mesFin);
 	       
 	public  List<ReporteSancion> listarDtSancionAnualPorAnioMesTipoSancionId(int anio, int mes, int topSnId);
 	

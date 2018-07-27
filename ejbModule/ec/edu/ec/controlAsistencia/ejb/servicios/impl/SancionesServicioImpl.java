@@ -306,6 +306,7 @@ public class SancionesServicioImpl implements SancionesServicio {
 		sbsql.append(" Select  dts.detallePuesto.dtpsId, dts.detallePuesto.fichaEmpleado.persona.prsIdentificacion, dts.detallePuesto.fichaEmpleado.persona.prsNombres||' '||dts.detallePuesto.fichaEmpleado.persona.prsPrimerApellido||' '||dts.detallePuesto.fichaEmpleado.persona.prsSegundoApellido, SUM(dts.dtpssnValor), dts.detallePuesto.puesto.pstDenominacion, dts.detallePuesto.dependencia.dpnDescripcion from DetallePuestoSancion dts ");
 		sbsql.append(" where dts.dtpssnAno = :anio ");
 		sbsql.append(" and dts.dtpssnMes= :mes");
+		sbsql.append(" and dts.detallePuesto.puesto.grupoOcupacional.regimen.rgmId = :rgmId");
 		sbsql.append(" and dts.sancion.tipoSancion.tpsnId = :tpsnId ");
 		sbsql.append(" group by dts.detallePuesto.dtpsId, dts.detallePuesto.fichaEmpleado.persona.prsIdentificacion, dts.detallePuesto.fichaEmpleado.persona.prsNombres||' '||dts.detallePuesto.fichaEmpleado.persona.prsPrimerApellido||' '||dts.detallePuesto.fichaEmpleado.persona.prsSegundoApellido, dts.detallePuesto.puesto.pstDenominacion, dts.detallePuesto.dependencia.dpnDescripcion  ");
 		Query q = em.createQuery(sbsql.toString());
@@ -354,19 +355,60 @@ public class SancionesServicioImpl implements SancionesServicio {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<ReporteSancion> listarDtSancionAnualPorAnioMesRegimenIdTipoSancionId(int anio, int mes, int rgmId,
-			int tpSnId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ReporteSancion> listarDtSancionAnualPorAnioMesRegimenIdTipoSancionId(int anio, int mes, int rgmId, int tpSnId, int mesFin) {
+		List<Object[]> resultado= new ArrayList<>();
+    	List<ReporteSancion> retorno=new ArrayList<>();
+    	ReporteSancion p= null;
+		try{
+		StringBuffer sbsql = new StringBuffer();
+		sbsql.append(" Select  dts.detallePuesto.dtpsId, dts.detallePuesto.fichaEmpleado.persona.prsIdentificacion, dts.detallePuesto.fichaEmpleado.persona.prsNombres||' '||dts.detallePuesto.fichaEmpleado.persona.prsPrimerApellido||' '||dts.detallePuesto.fichaEmpleado.persona.prsSegundoApellido, count(dts), dts.detallePuesto.puesto.pstDenominacion, dts.detallePuesto.dependencia.dpnDescripcion from DetallePuestoSancion dts ");
+		sbsql.append(" where dts.dtpssnAno = :anio  ");
+		sbsql.append(" and dts.dtpssnMes >= :mes and dts.dtpssnMes <= :mesFin ");
+		sbsql.append(" and dts.sancion.tipoSancion.tpsnId = :tpsnId ");
+		sbsql.append(" group by dts.detallePuesto.dtpsId, dts.detallePuesto.fichaEmpleado.persona.prsIdentificacion, dts.detallePuesto.fichaEmpleado.persona.prsNombres||' '||dts.detallePuesto.fichaEmpleado.persona.prsPrimerApellido||' '||dts.detallePuesto.fichaEmpleado.persona.prsSegundoApellido, dts.detallePuesto.puesto.pstDenominacion, dts.detallePuesto.dependencia.dpnDescripcion");
+		Query q = em.createQuery(sbsql.toString());
+		q.setParameter("anio",anio);
+		q.setParameter("mes",mes);
+		q.setParameter("mesFin",mesFin);
+		q.setParameter("tpsnId",tpSnId);
+		resultado = q.getResultList();
+		
+		Iterator itr = resultado.iterator();
+        while (itr.hasNext()){
+            Object[] obj = (Object[]) itr.next();
+            p = new ReporteSancion(Integer.parseInt(String.valueOf(obj[0])),
+            		String.valueOf(obj[1])
+            		,String.valueOf(obj[2])
+            		,Integer.parseInt(String.valueOf(obj[3]))
+            		, String.valueOf(obj[4])
+            		, String.valueOf(obj[5])
+            		);
+            retorno.add(p);
+         
+        };
+		
+
+		}catch(Exception  e){
+			
+			e.printStackTrace();
+			retorno=null;
+		}
+		
+		return retorno;
+
+		
+	
 	}
 
 	@Override
 	public List<ReporteSancion> listarDtSancionAnualPorAnioMesTipoSancionId(int anio, int mes, int topSnId) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<ReporteSancion> listarDiasSancionesPorTpSancionIdFaltaId(int tpSnId, int flId, int anio, int mes) {
 
@@ -375,25 +417,26 @@ public class SancionesServicioImpl implements SancionesServicio {
     	ReporteSancion p= null;
 		try{
 		StringBuffer sbsql = new StringBuffer();
-		sbsql.append("  from Categoria Falta cf DetallePuestoSancion dts ");
+		sbsql.append(" select  dts.dtpssnDias, ct.falta.flNombre  from  DetallePuestoSancion dts ");
+		sbsql.append(" right outer join dts.categoriaFalta ct ");
 		sbsql.append(" where dts.dtpssnAno = :anio ");
 		sbsql.append(" and dts.dtpssnMes= :mes");
-		sbsql.append(" and dts.sancion.tipoSancion.tpsnId = :tpsnId ");
-		sbsql.append(" group by dts.detallePuesto.dtpsId, dts.detallePuesto.fichaEmpleado.persona.prsIdentificacion, dts.detallePuesto.fichaEmpleado.persona.prsNombres||' '||dts.detallePuesto.fichaEmpleado.persona.prsPrimerApellido||' '||dts.detallePuesto.fichaEmpleado.persona.prsSegundoApellido, dts.detallePuesto.puesto.pstDenominacion, dts.detallePuesto.dependencia.dpnDescripcion  ");
+		sbsql.append(" and ct.tipoSancion.tpsnId = :tpsnId ");
+		sbsql.append(" and  dts.detallePuesto.dtpsId = :dtpsId ");
 		Query q = em.createQuery(sbsql.toString());
-		q.setParameter("tpsnId",tpSnId);
-		q.setParameter("flId",flId);
+		
 		q.setParameter("anio",anio);
 		q.setParameter("mes",mes);
+		q.setParameter("tpsnId",tpSnId);
+		q.setParameter("dtpsId",flId);
 		resultado = q.getResultList();
-
 
 		
 		Iterator itr = resultado.iterator();
         while (itr.hasNext()){
             Object[] obj = (Object[]) itr.next();
-            p = new ReporteSancion(String.valueOf(obj[0]),
-            		String.valueOf(obj[1])
+            p = new ReporteSancion(String.valueOf(obj[1]),
+            		String.valueOf(obj[0])
             		
             		);
             retorno.add(p);
@@ -409,6 +452,101 @@ public class SancionesServicioImpl implements SancionesServicio {
 		
 		return retorno;
 		
+	}
+
+	@Override
+	public List<ReporteSancion> listarDtSancionPorAnioMesRegimenIdTipoSancionIdNoAgrupado(int anio, int mes, int rgmId,
+			int tpsnId) {
+		List<Object[]> resultado= new ArrayList<>();
+    	List<ReporteSancion> retorno=new ArrayList<>();
+    	ReporteSancion p= null;
+		try{
+		StringBuffer sbsql = new StringBuffer();
+		sbsql.append(" Select  dts.detallePuesto.dtpsId, dts.detallePuesto.fichaEmpleado.persona.prsIdentificacion, dts.detallePuesto.fichaEmpleado.persona.prsNombres||' '||dts.detallePuesto.fichaEmpleado.persona.prsPrimerApellido||' '||dts.detallePuesto.fichaEmpleado.persona.prsSegundoApellido, dts.dtpssnValor, dts.detallePuesto.puesto.pstDenominacion, dts.detallePuesto.dependencia.dpnDescripcion from DetallePuestoSancion dts ");
+		sbsql.append(" where dts.dtpssnAno = :anio ");
+		sbsql.append(" and dts.dtpssnMes= :mes");
+		sbsql.append(" and dts.detallePuesto.puesto.grupoOcupacional.regimen.rgmId = :rgmId");
+		sbsql.append(" and dts.sancion.tipoSancion.tpsnId = :tpsnId");
+			
+		Query q = em.createQuery(sbsql.toString());
+		q.setParameter("anio",anio);
+		q.setParameter("mes",mes);
+		q.setParameter("rgmId",rgmId);
+		q.setParameter("tpsnId",tpsnId);
+		resultado = q.getResultList();
+		
+		Iterator itr = resultado.iterator();
+        while (itr.hasNext()){
+            Object[] obj = (Object[]) itr.next();
+            p = new ReporteSancion(Integer.parseInt(String.valueOf(obj[0])),
+            		String.valueOf(obj[1])
+            		,String.valueOf(obj[2])
+            		,Float.valueOf(String.valueOf(obj[3]))
+            		, String.valueOf(obj[4])
+            		, String.valueOf(obj[5])
+            		);
+              
+            retorno.add(p);
+         
+        };
+		
+		}catch(Exception  e){
+			throw  e; 
+		}
+		
+		return retorno;
+
+
+	}
+
+	@Override
+	public String DiasSancionPorTpSancionIdFaltaId(int tpSnId, int flId,int dtpsId, int anio, int mes) {
+    	
+    	String retorno="";
+		try{
+		StringBuffer sbsql = new StringBuffer();
+		sbsql.append(" select  dts.dtpssnDias  from  DetallePuestoSancion dts ");
+		sbsql.append(" where dts.dtpssnAno = :anio ");
+		sbsql.append(" and dts.dtpssnMes= :mes");
+		sbsql.append(" and dts.categoriaFalta.tipoSancion.tpsnId = :tpsnId ");
+		sbsql.append(" and dts.categoriaFalta.falta.flId = :flId ");
+		sbsql.append(" and  dts.detallePuesto.dtpsId = :dtpsId ");
+		Query q = em.createQuery(sbsql.toString());
+		
+		q.setParameter("anio",anio);
+		q.setParameter("mes",mes);
+		q.setParameter("tpsnId",tpSnId);
+		q.setParameter("flId",flId);
+		q.setParameter("dtpsId",dtpsId);
+		retorno = (String) q.getSingleResult();
+
+		
+		
+	}catch (Exception e) {
+		// TODO: handle exception
+	}
+		return retorno;	
+}
+
+	@Override
+	public Falta ObtenerFaltaPorNombre(String Nombre) {
+		Falta retorno = null;
+		try{
+		StringBuffer sbsql = new StringBuffer();
+		sbsql.append(" Select fl from Falta fl");
+		sbsql.append(" where fl.flNombre = :nombre");
+		Query q = em.createQuery(sbsql.toString());
+		q.setParameter("nombre", Nombre);
+		retorno = (Falta)q.getSingleResult();
+	
+		
+		}catch(Exception  e){
+			throw  e; 
+		}
+		
+		return retorno;
+	
+	
 	}
 }
 
