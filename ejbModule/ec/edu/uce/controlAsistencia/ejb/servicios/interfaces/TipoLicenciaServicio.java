@@ -11,7 +11,7 @@ public interface TipoLicenciaServicio {
 	 * 
 	 */
 	
-	public List<TipoLicencia> listarTipoLicencia();
+	public List<TipoLicencia> listarTipoLicencia(int id_regimen);
 	
 	/***
 	 * Busca un objeto TipoLicencia a través del ID
@@ -24,4 +24,7 @@ public interface TipoLicenciaServicio {
 	 * 
 	 */
 	public List<TipoLicencia> buscarTipoLicenciaPorPadre(int id_padre);
+	
+	
+
 }

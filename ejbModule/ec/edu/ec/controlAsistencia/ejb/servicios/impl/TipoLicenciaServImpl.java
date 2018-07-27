@@ -23,12 +23,13 @@ public class TipoLicenciaServImpl
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<TipoLicencia> listarTipoLicencia() {
+	public List<TipoLicencia> listarTipoLicencia( int id_regimen) {
 		List<TipoLicencia> listaTipoLicencias = null;
 		try {
 			StringBuffer sbsql = new StringBuffer();
-			sbsql.append("select tp from TipoLicencia tp where tp.tplcPadre = 0");
+			sbsql.append("select tp from TipoLicencia tp where tp.tipoLicencia is null and tp.regimen.rgmId = :id_regimen");
 			Query q = em.createQuery(sbsql.toString());
+			q.setParameter("id_regimen",id_regimen);
 			listaTipoLicencias = (List<TipoLicencia>) q.getResultList();
 		} catch (Exception e) {
 			throw e;
@@ -63,5 +64,6 @@ public class TipoLicenciaServImpl
 		}
 		return listaTipoLicencia;
 	}
+
 
 }
