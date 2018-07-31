@@ -549,7 +549,7 @@ public class SancionesServicioImpl implements SancionesServicio {
 	}
 
 	@Override
-	public DetallePuestoSancion  ObtenerUltimaSancion( int dtpsId,int ctgflId) {
+	public DetallePuestoSancion  obtenerUltimaSancion( int dtpsId,int ctgflId) {
 		DetallePuestoSancion retorno = null;
 		try{
 		StringBuffer sbsql = new StringBuffer();
@@ -558,6 +558,30 @@ public class SancionesServicioImpl implements SancionesServicio {
 		Query q = em.createQuery(sbsql.toString(),DetallePuestoSancion.class);
 		q.setParameter("dtpsId", dtpsId);
 		q.setParameter("ctgflId", ctgflId);
+	
+		retorno = (DetallePuestoSancion)q.getSingleResult();
+	
+		}catch(Exception  e){
+		 return null; 
+		}
+		
+		return retorno;
+
+	}
+
+	@Override
+	public DetallePuestoSancion obtenerSancionPorMesAnio(int dtpsId, int ctgflId, int mes, int anio) {
+		DetallePuestoSancion retorno = null;
+		try{
+		StringBuffer sbsql = new StringBuffer();
+		sbsql.append(" Select dps from DetallePuestoSancion dps ");
+		sbsql.append(" where  dps.detallePuesto.dtpsId= :dtpsId and dps.categoriaFalta.ctgflId= :ctgflId ");
+		sbsql.append(" and  dps.dtpssnMes= :mes and dps.dtpssnAno= :anio ");
+		Query q = em.createQuery(sbsql.toString(),DetallePuestoSancion.class);
+		q.setParameter("dtpsId", dtpsId);
+		q.setParameter("ctgflId", ctgflId);
+		q.setParameter("mes", mes);
+		q.setParameter("anio", anio);
 	
 		retorno = (DetallePuestoSancion)q.getSingleResult();
 	
