@@ -55,7 +55,7 @@ public class TipoLicenciaServImpl
 		try{
 			StringBuffer sbsql = new StringBuffer();
 			sbsql.append("select tp from TipoLicencia tp where");
-			sbsql.append(" tp.tplcPadre = :id_padre");
+			sbsql.append(" tp.tipoLicencia.tplcId = :id_padre");
 			Query q = em.createQuery(sbsql.toString());
 			q.setParameter("id_padre",id_padre);
 			listaTipoLicencia = (List<TipoLicencia>)q.getResultList();
