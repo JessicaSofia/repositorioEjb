@@ -10,13 +10,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import ec.edu.uce.controlAsistencia.ejb.datos.PersonaDto;
+
 import ec.edu.uce.controlAsistencia.ejb.datos.ReporteSancion;
 import ec.edu.uce.controlAsistencia.ejb.servicios.interfaces.SancionesServicio;
 import ec.edu.uce.controlAsistencia.jpa.entidades.CategoriaFalta;
 import ec.edu.uce.controlAsistencia.jpa.entidades.DetallePuestoSancion;
 import ec.edu.uce.controlAsistencia.jpa.entidades.Falta;
-import ec.edu.uce.controlAsistencia.jpa.entidades.Permiso;
 import ec.edu.uce.controlAsistencia.jpa.entidades.Sancion;
 import ec.edu.uce.controlAsistencia.jpa.entidades.TipoSancion;
 
@@ -548,6 +547,30 @@ public class SancionesServicioImpl implements SancionesServicio {
 	
 	
 	}
+
+	@Override
+	public DetallePuestoSancion  ObtenerUltimaSancion( int dtpsId,int ctgflId) {
+		DetallePuestoSancion retorno = null;
+		try{
+		StringBuffer sbsql = new StringBuffer();
+		sbsql.append(" Select dps from DetallePuestoSancion dps ");
+		sbsql.append(" where  dps.dtpssnId = ( select max(dps1.dtpssnId) from  DetallePuestoSancion dps1  where dps1.detallePuesto.dtpsId= :dtpsId and dps1.categoriaFalta.ctgflId= :ctgflId) ");
+		Query q = em.createQuery(sbsql.toString(),DetallePuestoSancion.class);
+		q.setParameter("dtpsId", dtpsId);
+		q.setParameter("ctgflId", ctgflId);
+	
+		retorno = (DetallePuestoSancion)q.getSingleResult();
+	
+		}catch(Exception  e){
+		 return null; 
+		}
+		
+		return retorno;
+
+	}
+	
+	
+	
 }
 
 

@@ -120,8 +120,8 @@ public interface SancionesServicio {
 	
 	
 	public List<ReporteSancion> listarDiasSancionesPorTpSancionIdFaltaId(int tpSnId, int flId, int anio, int mes);
-	public String DiasSancionPorTpSancionIdFaltaId(int tpSnId, int flId, int dtpsId, int anio, int mes);
 	
+	public String DiasSancionPorTpSancionIdFaltaId(int tpSnId, int flId, int dtpsId, int anio, int mes);
 	
 	public List<ReporteSancion> listarDtSancionPorAnioMesTipoSancionId(int anio, int  mes, int  tpsnId);
 	
@@ -132,10 +132,13 @@ public interface SancionesServicio {
 	public List<ReporteSancion> listarDtSancionAnualPorAnioMesRegimenIdTipoSancionId(int anio, int mes, int rgmId, int tpSnId, int mesFin);
 	       
 	public  List<ReporteSancion> listarDtSancionAnualPorAnioMesTipoSancionId(int anio, int mes, int topSnId);
+
+	/**
+	 * Obtiene  un objeto de tipo sancion siendo este el ultimo aplicado por detallePuestoId  y por falta 
+	 * @param tpSn
+	 * @return
+	 */
+	public DetallePuestoSancion ObtenerUltimaSancion(int dtpsId,int ctgflId );
 	
-	
-	
-	
-	
-	
+
 }
