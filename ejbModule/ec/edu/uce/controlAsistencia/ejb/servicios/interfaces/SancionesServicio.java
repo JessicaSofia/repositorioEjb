@@ -134,11 +134,11 @@ public interface SancionesServicio {
 	public  List<ReporteSancion> listarDtSancionAnualPorAnioMesTipoSancionId(int anio, int mes, int topSnId);
 
 	/**
-	 * Obtiene  un objeto de tipo sancion siendo este el ultimo aplicado por detallePuestoId  y por falta 
+	 * Obtiene  un objeto de tipo sancion siendo este el ultimo aplicado por detallePuestoId
 	 * @param tpSn
 	 * @return
 	 */
-	public DetallePuestoSancion obtenerUltimaSancion(int dtpsId,int ctgflId );
+	public DetallePuestoSancion obtenerUltimaSancion(int dtpsId );
 	
 	/**
 	 * Obtine un entidad dee tipo DetallePuestoSancion por Mes, anio, categoriaFalta y detallePuesto Id
