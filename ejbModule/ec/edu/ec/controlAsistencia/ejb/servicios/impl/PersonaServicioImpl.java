@@ -46,7 +46,7 @@ public class PersonaServicioImpl implements PersonaServicio {
     	
 		try{
 		StringBuffer sbsql = new StringBuffer();
-		sbsql.append(" Select prs.prsId, prs.prsNombres, prs.prsIdentificacion, prs.prsPrimerApellido, prs.prsSegundoApellido, fch.fcemId, dtlp.dtpsId, dtlp.dependencia.dpnId, dtlp.puesto.pstId, groc.regimen.rgmId, dtlp.relacionLaboral.rllbId");
+		sbsql.append(" Select prs.prsId, prs.prsNombres, case when prs.prsIdentificacion is  null then '0' else prs.prsIdentificacion end, prs.prsPrimerApellido, prs.prsSegundoApellido, fch.fcemId, dtlp.dtpsId, dtlp.dependencia.dpnId, dtlp.puesto.pstId, groc.regimen.rgmId, dtlp.relacionLaboral.rllbId");
 		sbsql.append(" from Persona prs, FichaEmpleado fch, DetallePuesto dtlp , Puesto p, GrupoOcupacional groc  where");
 		sbsql.append(" prs.prsNombres LIKE :nombres ");
 		sbsql.append(" and fch.persona.prsId=prs.prsId");
@@ -61,8 +61,24 @@ public class PersonaServicioImpl implements PersonaServicio {
 		Iterator itr = retorno.iterator();
         while (itr.hasNext()){
             Object[] obj = (Object[]) itr.next();
-            p = new PersonaDto(Integer.parseInt(String.valueOf(obj[0])),String.valueOf(obj[1]),String.valueOf(obj[2]).trim(),String.valueOf(obj[3]),String.valueOf(obj[4]),
-            Integer.parseInt(String.valueOf(obj[5])),Integer.parseInt(String.valueOf(obj[6])),Integer.parseInt(String.valueOf(obj[7])), Integer.parseInt(String.valueOf(obj[8])),Integer.parseInt(String.valueOf(obj[9])),Integer.parseInt(String.valueOf(obj[10])));
+            p=new PersonaDto();
+             p.setPrsId(Integer.parseInt(String.valueOf(obj[0])));
+            p.setPrsNombres(String.valueOf(obj[1]));
+            p.setPrsIdentificacion(String.valueOf(obj[2]).trim());
+            p.setPrsPrimerApellido(String.valueOf(obj[3]));
+            p.setPrsSegundoApellido(String.valueOf(obj[4]));
+            p.setFcemId(Integer.parseInt(String.valueOf(obj[5])));
+            p.setDtpsId(Integer.parseInt(String.valueOf(obj[6])));
+            p.setDpnId(Integer.parseInt(String.valueOf(obj[7])));
+            p.setPstId(Integer.parseInt(String.valueOf(obj[8])));
+            p.setRgmId(Integer.parseInt(String.valueOf(obj[9])));
+            int valor=1;
+            //String n=String.valueOf(obj[10]);
+            if(!String.valueOf(obj[10]).equals("null")) {
+            	valor=Integer.parseInt(String.valueOf(obj[10]));
+            }
+            p.setRllbId(valor);
+            
             
             persona.add(p);
         }
