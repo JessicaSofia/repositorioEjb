@@ -1,8 +1,8 @@
 package ec.edu.uce.controlAsistencia.ejb.servicios.interfaces;
 
-import ec.edu.uce.controlAsistencia.ejb.datos.ParametroVacacionesDto;
+
 import ec.edu.uce.controlAsistencia.jpa.entidades.ParametroVacacionRegimen;
-import ec.edu.uce.controlAsistencia.jpa.entidades.ParametroVacaciones;
+
 
 public interface ParametroVacacionesServicio {
 

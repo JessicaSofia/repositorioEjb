@@ -33,8 +33,9 @@ public class SancionesServicioImpl implements SancionesServicio {
 		try {
 			
 			em.persist(dtSancion);
+			retorno = true;
 		}catch (Exception e) {
-			retorno=true;
+			retorno=false;
 			throw e;
 		}
 		return retorno;
@@ -554,7 +555,7 @@ public class SancionesServicioImpl implements SancionesServicio {
 		try{
 		StringBuffer sbsql = new StringBuffer();
 		sbsql.append(" Select dps from DetallePuestoSancion dps ");
-		sbsql.append(" where  dps.dtpssnId = ( select max(dps1.dtpssnId) from  DetallePuestoSancion dps1  where dps1.detallePuesto.dtpsId= :dtpsId  ) ");
+		sbsql.append(" where  dps.dtpssnId = ( select max(dps1.dtpssnId) from  DetallePuestoSancion dps1  where dps1.detallePuesto.dtpsId= :dtpsId ) ");
 		Query q = em.createQuery(sbsql.toString(),DetallePuestoSancion.class);
 		q.setParameter("dtpsId", dtpsId);
 	
