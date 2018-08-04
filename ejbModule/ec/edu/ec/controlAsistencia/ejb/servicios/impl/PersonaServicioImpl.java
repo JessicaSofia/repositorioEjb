@@ -46,13 +46,16 @@ public class PersonaServicioImpl implements PersonaServicio {
     	
 		try{
 		StringBuffer sbsql = new StringBuffer();
-		sbsql.append(" Select prs.prsId, prs.prsNombres, case when prs.prsIdentificacion is  null then '0' else prs.prsIdentificacion end, prs.prsPrimerApellido, prs.prsSegundoApellido, fch.fcemId, dtlp.dtpsId, dtlp.dependencia.dpnId, dtlp.puesto.pstId, groc.regimen.rgmId, dtlp.relacionLaboral.rllbId");
-		sbsql.append(" from Persona prs, FichaEmpleado fch, DetallePuesto dtlp , Puesto p, GrupoOcupacional groc  where");
-		sbsql.append(" prs.prsNombres LIKE :nombres ");
-		sbsql.append(" and fch.persona.prsId=prs.prsId");
-		sbsql.append(" and dtlp.fichaEmpleado.fcemId=fch.fcemId");
-		sbsql.append(" and dtlp.puesto.pstId=p.pstId"); 
-		sbsql.append(" and p.grupoOcupacional.grocId=groc.grocId");
+		sbsql.append(" Select prs.prsId, prs.prsNombres, prs.prsIdentificacion, prs.prsPrimerApellido, prs.prsSegundoApellido, ");
+		sbsql.append(" fch.fcemId, dtlp.dtpsId, d.dpnId,  d.dpnDescripcion, p.pstId, p.pstDenominacion, rgm.rgmId, rgm.rgmDescripcion, ");
+		sbsql.append(" fch.categoria.ctgId ");
+		sbsql.append(" from DetallePuesto dtlp  left join  dtlp.fichaEmpleado fch ");
+		sbsql.append( " left join dtlp.puesto p " );
+		sbsql.append( " left join p.grupoOcupacional groc "  );
+		sbsql.append( " left join groc.regimen rgm "  );
+		sbsql.append( " left join dtlp.dependencia d " );
+		sbsql.append( " left join fch.persona  prs " );
+		sbsql.append(" where prs.prsNombres LIKE :nombres ");
 		 
 		Query q = em.createQuery(sbsql.toString());
 		q.setParameter("nombres","%"+nombres+"%");
@@ -67,19 +70,22 @@ public class PersonaServicioImpl implements PersonaServicio {
             p.setPrsIdentificacion(String.valueOf(obj[2]).trim());
             p.setPrsPrimerApellido(String.valueOf(obj[3]));
             p.setPrsSegundoApellido(String.valueOf(obj[4]));
+            
             p.setFcemId(Integer.parseInt(String.valueOf(obj[5])));
             p.setDtpsId(Integer.parseInt(String.valueOf(obj[6])));
             p.setDpnId(Integer.parseInt(String.valueOf(obj[7])));
-            p.setPstId(Integer.parseInt(String.valueOf(obj[8])));
-            p.setRgmId(Integer.parseInt(String.valueOf(obj[9])));
-            int valor=1;
-            //String n=String.valueOf(obj[10]);
-            if(!String.valueOf(obj[10]).equals("null")) {
-            	valor=Integer.parseInt(String.valueOf(obj[10]));
+            p.setDpnNombre(String.valueOf(obj[8]));
+   
+            p.setPstId(Integer.parseInt(String.valueOf(obj[9])));
+            p.setPstNombre(String.valueOf(obj[10]));
+            p.setRgmId(Integer.parseInt(String.valueOf(obj[11])));
+            p.setRgmNombre(String.valueOf(obj[12]));
+            int valor=0;
+            if(!String.valueOf(obj[13]).equals("null")) {
+            	valor=Integer.parseInt(String.valueOf(obj[13]));
             }
-            p.setRllbId(valor);
-            
-            
+            p.setCtgId(valor);
+          
             persona.add(p);
         }
 		}catch(Exception  e){

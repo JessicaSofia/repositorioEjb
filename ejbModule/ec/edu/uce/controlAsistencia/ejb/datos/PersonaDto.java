@@ -20,6 +20,11 @@ public class PersonaDto  implements Serializable {
 	private int pstId;
 	private int rgmId;
 	private int rllbId;
+	private int ctgId;
+	private String dpnNombre;
+	private String pstNombre;
+	private String rgmNombre;
+	
 	
 	
 	
@@ -199,6 +204,62 @@ public class PersonaDto  implements Serializable {
 
 	public void setDpnId(int dpnId) {
 		this.dpnId = dpnId;
+	}
+
+
+
+
+	public int getCtgId() {
+		return ctgId;
+	}
+
+
+
+
+	public void setCtgId(int ctgId) {
+		this.ctgId = ctgId;
+	}
+
+
+
+
+	public String getDpnNombre() {
+		return dpnNombre;
+	}
+
+
+
+
+	public void setDpnNombre(String dpnNombre) {
+		this.dpnNombre = dpnNombre;
+	}
+
+
+
+
+	public String getPstNombre() {
+		return pstNombre;
+	}
+
+
+
+
+	public void setPstNombre(String pstNombre) {
+		this.pstNombre = pstNombre;
+	}
+
+
+
+
+	public String getRgmNombre() {
+		return rgmNombre;
+	}
+
+
+
+
+	public void setRgmNombre(String rgmNombre) {
+		this.rgmNombre = rgmNombre;
 	}
 
 
