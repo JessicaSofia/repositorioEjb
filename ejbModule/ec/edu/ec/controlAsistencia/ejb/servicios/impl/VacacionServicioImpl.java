@@ -56,7 +56,7 @@ public class VacacionServicioImpl implements  VacacionServicio {
 		try{
 		StringBuffer sbsql = new StringBuffer();
 		sbsql.append(" Select vc from Vacacion vc where");
-		sbsql.append(" vc.detallePuesto.dtpsId = :detallePuestoId");
+		sbsql.append(" vc.dtpsId = :detallePuestoId");
 		Query q = em.createQuery(sbsql.toString());
 		q.setParameter("detallePuestoId",detallePuestoId);
 		retorno = (List<Vacacion>)q.getResultList();
@@ -90,7 +90,7 @@ public class VacacionServicioImpl implements  VacacionServicio {
 		try{
 		StringBuffer sbsql = new StringBuffer();
 		sbsql.append(" Select svc from SaldoVacacion svc where");
-		sbsql.append(" svc.detallePuesto.dtpsId =  :detallePuestoId  and svc.slvcEstado != 0");
+		sbsql.append(" svc.dtpsId =  :detallePuestoId  and svc.slvcEstado != 0");
 		Query q = em.createQuery(sbsql.toString());
 		q.setParameter("detallePuestoId",detallePuestoId);
 		retorno = (List<SaldoVacacion>)q.getResultList();
@@ -177,7 +177,7 @@ public class VacacionServicioImpl implements  VacacionServicio {
 		 try{
 			   StringBuffer sbsql = new StringBuffer();
 				sbsql.append(" select count(svc) from SaldoVacacion  svc");
-				sbsql.append(" WHERE svc.detallePuesto.dtpsId= :dtpsId)");
+				sbsql.append(" WHERE svc.dtpsId= :dtpsId)");
 				sbsql.append(" AND  svc.slvcEstado = 1)");
 				Query q = em.createQuery(sbsql.toString(), SaldoVacacion.class);
 				q.setParameter("dtpsId", dtpsId);
@@ -212,14 +212,5 @@ public class VacacionServicioImpl implements  VacacionServicio {
 		return retorno;
 	
 	}
-	
-	
-
-	
-
-	
-	
-    
-    
 
 }

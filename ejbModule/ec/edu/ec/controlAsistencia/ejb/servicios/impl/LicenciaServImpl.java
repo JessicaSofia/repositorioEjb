@@ -81,13 +81,12 @@ public class LicenciaServImpl implements ec.edu.uce.controlAsistencia.ejb.servic
 
 
 	@SuppressWarnings("unchecked")
-	@Override
-	public List<Licencia> ListaLicenciaPorDetallePuestoId(int detallePuestoId) {
+ 	public List<Licencia> ListaLicenciaPorDetallePuestoId(int detallePuestoId) {
 		List<Licencia> listaLicencia = null;
 		try{
 		StringBuffer sbsql = new StringBuffer();
 		sbsql.append("Select lp from Licencia lp where");
-		sbsql.append(" lp.detallePuesto.dtpsId = :detallePuestoId");
+		sbsql.append(" lp.dtpsId = :detallePuestoId");
 		Query q = em.createQuery(sbsql.toString());
 		q.setParameter("detallePuestoId",detallePuestoId);
 		listaLicencia = (List<Licencia>)q.getResultList();

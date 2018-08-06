@@ -28,7 +28,7 @@ public class PermisoServicioImpl implements PermisoServicio {
 		try {
 			StringBuffer sbsql = new StringBuffer();
 			sbsql.append("Select lp from Permiso lp where");
-			sbsql.append(" lp.detallePuesto.dtpsId = :detallePuestoId");
+			sbsql.append(" lp.dtpsId = :detallePuestoId");
 			Query q = em.createQuery(sbsql.toString());
 			q.setParameter("detallePuestoId", detallePuestoId);
 			listaPermiso = (List<Permiso>) q.getResultList();
