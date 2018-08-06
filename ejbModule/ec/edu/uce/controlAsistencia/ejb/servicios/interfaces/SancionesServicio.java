@@ -110,28 +110,14 @@ public interface SancionesServicio {
 	public List<ReporteSancion> listarDtSancionPorAnioMesRegimenIdTipoSancionIdNoAgrupado(int  anio, int mes, int  rgmId, int  tpsnId);
 	
 	
-	/**
-	 *  Obtiene una lista de DetallePuesto Sancion friltrado por Año, mes y tipo de Sancion
-	 * @param anio
-	 * @param mes
-	 * @param tpsnId
-	 * @return
-	 */
-	
-	
-	public List<ReporteSancion> listarDiasSancionesPorTpSancionIdFaltaId(int tpSnId, int flId, int anio, int mes);
-	
 	public String DiasSancionPorTpSancionIdFaltaId(int tpSnId, int flId, int dtpsId, int anio, int mes);
-	
-	public List<ReporteSancion> listarDtSancionPorAnioMesTipoSancionId(int anio, int  mes, int  tpsnId);
 	
 	public List<ReporteSancion> listarDtSancionAnualPorAnioMes(int anioInicio, int mesInicio, int  anioFin, int mesFin);
 	
-	public List<ReporteSancion> listarDtSancionAnualPorAnioMesRegimenId(int anio, int mes,int rgmId);
+	
 	 
 	public List<ReporteSancion> listarDtSancionAnualPorAnioMesRegimenIdTipoSancionId(int anio, int mes, int rgmId, int tpSnId, int mesFin);
 	       
-	public  List<ReporteSancion> listarDtSancionAnualPorAnioMesTipoSancionId(int anio, int mes, int topSnId);
 
 	/**
 	 * Obtiene  un objeto de tipo sancion siendo este el ultimo aplicado por detallePuestoId
@@ -149,6 +135,13 @@ public interface SancionesServicio {
 	 * @return
 	 */
 	public DetallePuestoSancion obtenerSancionPorMesAnio(int dtpsId,int ctgflId, int mes,int anio);
+	
+	/**
+	 * Obtner sueldo por dtpsId
+	 * @param dtpsId
+	 * @return
+	 */
+	public  int ObtnerSueldoPorDetallePuestoId(int dtpsId);
 	
 
 }

@@ -11,5 +11,6 @@ public interface PersonaServicio {
 	 * @return
 	 */
 	public List<PersonaDto> BuscarPorNombres(String nombres);
+	
 
 }

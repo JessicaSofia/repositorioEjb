@@ -62,7 +62,8 @@ public class SancionesServicioImpl implements SancionesServicio {
 		try{
 		StringBuffer sbsql = new StringBuffer();
 		sbsql.append(" Select dps from DetallePuestoSancion dps where");
-		sbsql.append(" dps.detallePuesto.dtpsId = :detallePuestoId");
+		sbsql.append(" dps.dtpsId = :detallePuestoId");
+		sbsql.append(" order by dps.dtpsId");
 		Query q = em.createQuery(sbsql.toString());
 		q.setParameter("detallePuestoId",dtpsId);
 		retorno = (List<DetallePuestoSancion>)q.getResultList();
@@ -251,19 +252,20 @@ public class SancionesServicioImpl implements SancionesServicio {
 		
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<ReporteSancion> listarDtSancionPorAnioMesRegimenIdTipoSancionId(int anio, int mes, int rgmId,
-			int tpsnId) {
+	public List<ReporteSancion> listarDtSancionPorAnioMesRegimenIdTipoSancionId(int anio, int mes, int rgmId, int tpsnId) {
 		List<Object[]> resultado= new ArrayList<>();
     	List<ReporteSancion> retorno=new ArrayList<>();
     	ReporteSancion p= null;
 		try{
 		StringBuffer sbsql = new StringBuffer();
-		sbsql.append(" Select  dts.detallePuesto.dtpsId, dts.detallePuesto.fichaEmpleado.persona.prsIdentificacion, dts.detallePuesto.fichaEmpleado.persona.prsNombres||' '||dts.detallePuesto.fichaEmpleado.persona.prsPrimerApellido||' '||dts.detallePuesto.fichaEmpleado.persona.prsSegundoApellido, SUM(dts.dtpssnValor), dts.detallePuesto.puesto.pstDenominacion, dts.detallePuesto.dependencia.dpnDescripcion from DetallePuestoSancion dts ");
-		sbsql.append(" where dts.dtpssnAno = :anio ");
-		sbsql.append(" and dts.dtpssnMes= :mes");
-		sbsql.append(" and dts.detallePuesto.puesto.grupoOcupacional.regimen.rgmId = :rgmId");
-		sbsql.append(" and dts.sancion.tipoSancion.tpsnId = :tpsnId");
-		sbsql.append(" group by dts.detallePuesto.dtpsId, dts.detallePuesto.fichaEmpleado.persona.prsIdentificacion, dts.detallePuesto.fichaEmpleado.persona.prsNombres||' '||dts.detallePuesto.fichaEmpleado.persona.prsPrimerApellido||' '||dts.detallePuesto.fichaEmpleado.persona.prsSegundoApellido, dts.detallePuesto.puesto.pstDenominacion, dts.detallePuesto.dependencia.dpnDescripcion  ");
+		sbsql.append(" Select  dtssn.dtpsId, dts.fichaEmpleado.persona.prsIdentificacion, dts.fichaEmpleado.persona.prsNombres||' '||dts.fichaEmpleado.persona.prsPrimerApellido||' '||dts.fichaEmpleado.persona.prsSegundoApellido, SUM(dtssn.dtpssnValor), dts.puesto.pstDenominacion, dts.dependencia.dpnDescripcion ");
+		sbsql.append(" from DetallePuestoSancion dtssn, DetallePuesto dts ");
+		sbsql.append(" where dtssn.dtpssnAno = :anio ");
+		sbsql.append(" and dtssn.dtpssnMes= :mes");
+		sbsql.append(" and dtssn.dtpsId= dts.dtpsId");
+		sbsql.append(" and dts.puesto.grupoOcupacional.regimen.rgmId = :rgmId");
+		sbsql.append(" and dtssn.sancion.tipoSancion.tpsnId = :tpsnId");
+		sbsql.append(" group by dtssn.dtpsId, dts.fichaEmpleado.persona.prsIdentificacion, dts.fichaEmpleado.persona.prsNombres||' '||dts.fichaEmpleado.persona.prsPrimerApellido||' '||dts.fichaEmpleado.persona.prsSegundoApellido, dts.puesto.pstDenominacion, dts.dependencia.dpnDescripcion  ");
 		
 		Query q = em.createQuery(sbsql.toString());
 		q.setParameter("anio",anio);
@@ -295,52 +297,7 @@ public class SancionesServicioImpl implements SancionesServicio {
 
 	}             
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<ReporteSancion> listarDtSancionPorAnioMesTipoSancionId(int anio, int mes, int tpsnId) {
-		List<Object[]> resultado= new ArrayList<>();
-    	List<ReporteSancion> retorno=new ArrayList<>();
-    	ReporteSancion p= null;
-		try{
-		StringBuffer sbsql = new StringBuffer();
-		sbsql.append(" Select  dts.detallePuesto.dtpsId, dts.detallePuesto.fichaEmpleado.persona.prsIdentificacion, dts.detallePuesto.fichaEmpleado.persona.prsNombres||' '||dts.detallePuesto.fichaEmpleado.persona.prsPrimerApellido||' '||dts.detallePuesto.fichaEmpleado.persona.prsSegundoApellido, SUM(dts.dtpssnValor), dts.detallePuesto.puesto.pstDenominacion, dts.detallePuesto.dependencia.dpnDescripcion from DetallePuestoSancion dts ");
-		sbsql.append(" where dts.dtpssnAno = :anio ");
-		sbsql.append(" and dts.dtpssnMes= :mes");
-		sbsql.append(" and dts.detallePuesto.puesto.grupoOcupacional.regimen.rgmId = :rgmId");
-		sbsql.append(" and dts.sancion.tipoSancion.tpsnId = :tpsnId ");
-		sbsql.append(" group by dts.detallePuesto.dtpsId, dts.detallePuesto.fichaEmpleado.persona.prsIdentificacion, dts.detallePuesto.fichaEmpleado.persona.prsNombres||' '||dts.detallePuesto.fichaEmpleado.persona.prsPrimerApellido||' '||dts.detallePuesto.fichaEmpleado.persona.prsSegundoApellido, dts.detallePuesto.puesto.pstDenominacion, dts.detallePuesto.dependencia.dpnDescripcion  ");
-		Query q = em.createQuery(sbsql.toString());
-		q.setParameter("anio",anio);
-		q.setParameter("mes",mes);
-		q.setParameter("tpsnId",tpsnId);
-		resultado = q.getResultList();
-		
-		Iterator itr = resultado.iterator();
-        while (itr.hasNext()){
-            Object[] obj = (Object[]) itr.next();
-            p = new ReporteSancion(Integer.parseInt(String.valueOf(obj[0])),
-            		String.valueOf(obj[1])
-            		,String.valueOf(obj[2])
-            		,Float.valueOf(String.valueOf(obj[3]))
-            		, String.valueOf(obj[4])
-            		, String.valueOf(obj[5])
-            		);
-            retorno.add(p);
-         
-        };
-		
-
-		}catch(Exception  e){
-			
-			e.printStackTrace();
-			retorno=null;
-		}
-		
-		return retorno;
-       }
-
-	
-	@Override
+		@Override
 	public List<ReporteSancion> listarDtSancionAnualPorAnioMes(int anioInicio, int mesInicio, int  anioFin, int mesFin) {
 	
 		   
@@ -349,110 +306,7 @@ public class SancionesServicioImpl implements SancionesServicio {
 
 	}
 
-	@Override
-	public List<ReporteSancion> listarDtSancionAnualPorAnioMesRegimenId(int anio, int mes, int rgmId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<ReporteSancion> listarDtSancionAnualPorAnioMesRegimenIdTipoSancionId(int anio, int mes, int rgmId, int tpSnId, int mesFin) {
-		List<Object[]> resultado= new ArrayList<>();
-    	List<ReporteSancion> retorno=new ArrayList<>();
-    	ReporteSancion p= null;
-		try{
-		StringBuffer sbsql = new StringBuffer();
-		sbsql.append(" Select  dts.detallePuesto.dtpsId, dts.detallePuesto.fichaEmpleado.persona.prsIdentificacion, dts.detallePuesto.fichaEmpleado.persona.prsNombres||' '||dts.detallePuesto.fichaEmpleado.persona.prsPrimerApellido||' '||dts.detallePuesto.fichaEmpleado.persona.prsSegundoApellido, count(dts), dts.detallePuesto.puesto.pstDenominacion, dts.detallePuesto.dependencia.dpnDescripcion from DetallePuestoSancion dts ");
-		sbsql.append(" where dts.dtpssnAno = :anio  ");
-		sbsql.append(" and dts.dtpssnMes >= :mes and dts.dtpssnMes <= :mesFin ");
-		sbsql.append(" and dts.sancion.tipoSancion.tpsnId = :tpsnId ");
-		sbsql.append(" group by dts.detallePuesto.dtpsId, dts.detallePuesto.fichaEmpleado.persona.prsIdentificacion, dts.detallePuesto.fichaEmpleado.persona.prsNombres||' '||dts.detallePuesto.fichaEmpleado.persona.prsPrimerApellido||' '||dts.detallePuesto.fichaEmpleado.persona.prsSegundoApellido, dts.detallePuesto.puesto.pstDenominacion, dts.detallePuesto.dependencia.dpnDescripcion");
-		Query q = em.createQuery(sbsql.toString());
-		q.setParameter("anio",anio);
-		q.setParameter("mes",mes);
-		q.setParameter("mesFin",mesFin);
-		q.setParameter("tpsnId",tpSnId);
-		resultado = q.getResultList();
-		
-		Iterator itr = resultado.iterator();
-        while (itr.hasNext()){
-            Object[] obj = (Object[]) itr.next();
-            p = new ReporteSancion(Integer.parseInt(String.valueOf(obj[0])),
-            		String.valueOf(obj[1])
-            		,String.valueOf(obj[2])
-            		,Integer.parseInt(String.valueOf(obj[3]))
-            		, String.valueOf(obj[4])
-            		, String.valueOf(obj[5])
-            		);
-            retorno.add(p);
-         
-        };
-		
-
-		}catch(Exception  e){
-			
-			e.printStackTrace();
-			retorno=null;
-		}
-		
-		return retorno;
-
-		
 	
-	}
-
-	@Override
-	public List<ReporteSancion> listarDtSancionAnualPorAnioMesTipoSancionId(int anio, int mes, int topSnId) {
-		
-		return null;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<ReporteSancion> listarDiasSancionesPorTpSancionIdFaltaId(int tpSnId, int flId, int anio, int mes) {
-
-		List<Object[]> resultado= new ArrayList<>();
-    	List<ReporteSancion> retorno=new ArrayList<>();
-    	ReporteSancion p= null;
-		try{
-		StringBuffer sbsql = new StringBuffer();
-		sbsql.append(" select  dts.dtpssnDias, ct.falta.flNombre  from  DetallePuestoSancion dts ");
-		sbsql.append(" right outer join dts.categoriaFalta ct ");
-		sbsql.append(" where dts.dtpssnAno = :anio ");
-		sbsql.append(" and dts.dtpssnMes= :mes");
-		sbsql.append(" and ct.tipoSancion.tpsnId = :tpsnId ");
-		sbsql.append(" and  dts.detallePuesto.dtpsId = :dtpsId ");
-		Query q = em.createQuery(sbsql.toString());
-		
-		q.setParameter("anio",anio);
-		q.setParameter("mes",mes);
-		q.setParameter("tpsnId",tpSnId);
-		q.setParameter("dtpsId",flId);
-		resultado = q.getResultList();
-
-		
-		Iterator itr = resultado.iterator();
-        while (itr.hasNext()){
-            Object[] obj = (Object[]) itr.next();
-            p = new ReporteSancion(String.valueOf(obj[1]),
-            		String.valueOf(obj[0])
-            		
-            		);
-            retorno.add(p);
-         
-        };
-		
-
-		}catch(Exception  e){
-			
-			e.printStackTrace();
-			retorno=null;
-		}
-		
-		return retorno;
-		
-	}
 
 	@Override
 	public List<ReporteSancion> listarDtSancionPorAnioMesRegimenIdTipoSancionIdNoAgrupado(int anio, int mes, int rgmId,
@@ -462,11 +316,13 @@ public class SancionesServicioImpl implements SancionesServicio {
     	ReporteSancion p= null;
 		try{
 		StringBuffer sbsql = new StringBuffer();
-		sbsql.append(" Select  dts.detallePuesto.dtpsId, dts.detallePuesto.fichaEmpleado.persona.prsIdentificacion, dts.detallePuesto.fichaEmpleado.persona.prsNombres||' '||dts.detallePuesto.fichaEmpleado.persona.prsPrimerApellido||' '||dts.detallePuesto.fichaEmpleado.persona.prsSegundoApellido, dts.dtpssnValor, dts.detallePuesto.puesto.pstDenominacion, dts.detallePuesto.dependencia.dpnDescripcion from DetallePuestoSancion dts ");
-		sbsql.append(" where dts.dtpssnAno = :anio ");
-		sbsql.append(" and dts.dtpssnMes= :mes");
-		sbsql.append(" and dts.detallePuesto.puesto.grupoOcupacional.regimen.rgmId = :rgmId");
-		sbsql.append(" and dts.sancion.tipoSancion.tpsnId = :tpsnId");
+		sbsql.append(" Select  dtssn.dtpsId, dts.fichaEmpleado.persona.prsIdentificacion, dts.fichaEmpleado.persona.prsNombres||' '||dts.fichaEmpleado.persona.prsPrimerApellido||' '||dts.fichaEmpleado.persona.prsSegundoApellido, SUM(dtssn.dtpssnValor), dts.puesto.pstDenominacion, dts.dependencia.dpnDescripcion ");
+		sbsql.append(" from DetallePuestoSancion dtssn, DetallePuesto dts ");
+		sbsql.append(" where dtssn.dtpssnAno = :anio ");
+		sbsql.append(" and dtssn.dtpssnMes= :mes");
+		sbsql.append(" and dtssn.dtpsId= dts.dtpsId");
+		sbsql.append(" and dts.puesto.grupoOcupacional.regimen.rgmId = :rgmId");
+		sbsql.append(" and dtssn.sancion.tipoSancion.tpsnId = :tpsnId");
 			
 		Query q = em.createQuery(sbsql.toString());
 		q.setParameter("anio",anio);
@@ -510,7 +366,7 @@ public class SancionesServicioImpl implements SancionesServicio {
 		sbsql.append(" and dts.dtpssnMes= :mes");
 		sbsql.append(" and dts.categoriaFalta.tipoSancion.tpsnId = :tpsnId ");
 		sbsql.append(" and dts.categoriaFalta.falta.flId = :flId ");
-		sbsql.append(" and  dts.detallePuesto.dtpsId = :dtpsId ");
+		sbsql.append(" and  dts.dtpsId = :dtpsId ");
 		Query q = em.createQuery(sbsql.toString());
 		
 		q.setParameter("anio",anio);
@@ -555,7 +411,7 @@ public class SancionesServicioImpl implements SancionesServicio {
 		try{
 		StringBuffer sbsql = new StringBuffer();
 		sbsql.append(" Select dps from DetallePuestoSancion dps ");
-		sbsql.append(" where  dps.dtpssnId = ( select max(dps1.dtpssnId) from  DetallePuestoSancion dps1  where dps1.detallePuesto.dtpsId= :dtpsId ) ");
+		sbsql.append(" where  dps.dtpssnId = ( select max(dps1.dtpssnId) from  DetallePuestoSancion dps1  where dps1.dtpsId= :dtpsId ) ");
 		Query q = em.createQuery(sbsql.toString(),DetallePuestoSancion.class);
 		q.setParameter("dtpsId", dtpsId);
 	
@@ -575,7 +431,7 @@ public class SancionesServicioImpl implements SancionesServicio {
 		try{
 		StringBuffer sbsql = new StringBuffer();
 		sbsql.append(" Select dps from DetallePuestoSancion dps ");
-		sbsql.append(" where  dps.detallePuesto.dtpsId= :dtpsId and dps.categoriaFalta.ctgflId= :ctgflId ");
+		sbsql.append(" where  dps.dtpsId= :dtpsId and dps.categoriaFalta.ctgflId= :ctgflId ");
 		sbsql.append(" and  dps.dtpssnMes= :mes and dps.dtpssnAno= :anio ");
 		Query q = em.createQuery(sbsql.toString(),DetallePuestoSancion.class);
 		q.setParameter("dtpsId", dtpsId);
@@ -591,6 +447,32 @@ public class SancionesServicioImpl implements SancionesServicio {
 		
 		return retorno;
 
+	}
+	
+	@Override
+	public int ObtnerSueldoPorDetallePuestoId(int dtpsId) {
+		 int  sueldo=0;;
+		 try{
+			 
+			 	StringBuffer sbsql = new StringBuffer();
+				sbsql.append(" select case when  dtps.dtpsRmu is null then 0 else dtps.dtpsRmu  end from DetallePuesto dtps ");
+				sbsql.append(" where dtps.dtpsId= :dtpsId ");
+				Query q = em.createQuery(sbsql.toString());
+				q.setParameter("dtpsId", dtpsId);
+				sueldo = (int) q.getSingleResult();
+				
+				}catch(Exception  e){
+					throw  e; 
+				}
+		
+		 		return sueldo;
+	}
+
+	@Override
+	public List<ReporteSancion> listarDtSancionAnualPorAnioMesRegimenIdTipoSancionId(int anio, int mes, int rgmId,
+			int tpSnId, int mesFin) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

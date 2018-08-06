@@ -15,10 +15,8 @@ public class ReporteSancion  implements Serializable {
 	private int  numSancion;
 	private String identificacion;
 	private String Nombres;
-	private String  falta;
 	private String dias;
 	private float valor;
-	private String descripcion;
 	private String cargo;
 	private String dependencia;
 	private int frecuencia;
@@ -28,21 +26,6 @@ public class ReporteSancion  implements Serializable {
 	
 	
 	
-	public ReporteSancion(int dtpsId,int dtpsSnId, int numSancion, String identificacion, String nombres, String falta, String sancion,
-			String dias, float valor, String descripcion, String cargo, String dependencia) {
-		super();
-		this.dtpsSnId = dtpsSnId;
-		this.numSancion = numSancion;
-		this.identificacion = identificacion;
-		Nombres = nombres;
-		this.falta = falta;
-		this.dias = dias;
-		this.valor = valor;
-		this.sancion=sancion;
-		this.descripcion = descripcion;
-		this.cargo = cargo;
-		this.dependencia = dependencia;
-	}
 	
 
 	public ReporteSancion(int dtpsId, String identificacion, String nombres, float valor, String cargo, String dependencia) {
@@ -65,11 +48,6 @@ public class ReporteSancion  implements Serializable {
 		this.dtpsId=dtpsId;
 	}
 
-	 public ReporteSancion(String falta, String dias) {
-		super();
-		this.falta = falta;
-		this.dias = dias;
-	}
 
 	 public ReporteSancion(int dtpsId, String identificacion, String nombres, float valor, String cargo, String dependencia, List<ReporteSancion> faltas) {
 			super();
@@ -122,12 +100,6 @@ public class ReporteSancion  implements Serializable {
 	public void setNombres(String nombres) {
 		Nombres = nombres;
 	}
-	public String getFalta() {
-		return falta;
-	}
-	public void setFalta(String falta) {
-		this.falta = falta;
-	}
 	public String getDias() {
 		return dias;
 	}
@@ -140,12 +112,7 @@ public class ReporteSancion  implements Serializable {
 	public void setValor(float valor) {
 		this.valor = valor;
 	}
-	public String getDescripcion() {
-		return descripcion;
-	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
+	
 	public String getCargo() {
 		return cargo;
 	}
