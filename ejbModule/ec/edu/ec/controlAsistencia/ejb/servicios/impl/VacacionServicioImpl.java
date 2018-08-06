@@ -130,7 +130,7 @@ public class VacacionServicioImpl implements  VacacionServicio {
 			   try{
 				   StringBuffer sbsql = new StringBuffer();
 					sbsql.append(" select svc from SaldoVacacion  svc");
-					sbsql.append(" WHERE  svc.slvcPeriodo = :periodo and svc.detallePuesto.dtpsId= :dtpsId)");
+					sbsql.append(" WHERE  svc.slvcPeriodo = :periodo and svc.dtpsId= :dtpsId)");
 					sbsql.append(" AND  svc.slvcEstado = 1)");
 					Query q = em.createQuery(sbsql.toString(), SaldoVacacion.class);
 					q.setParameter("periodo",periodo);
@@ -151,9 +151,12 @@ public class VacacionServicioImpl implements  VacacionServicio {
 		SaldoVacacion retorno= null;
 		try {
 			 retorno=em.merge(saldoVacacion);
+			 System.out.println("Actualiza");
 			 
 		}catch (Exception e) {
-			// TODO: handle exception
+			System.out.println(e);
+			throw e;
+			
 		}
 		return retorno;
 	}
