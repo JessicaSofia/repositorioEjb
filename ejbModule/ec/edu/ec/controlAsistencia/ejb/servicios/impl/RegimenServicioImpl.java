@@ -61,4 +61,27 @@ public class RegimenServicioImpl implements RegimenServicio {
 		return retorno;
 	}
 
+	@Override
+	public String obtenerNombreRegimenporDetallePuestoId(int dpstId) {
+		String retorno="";
+		try{
+			StringBuffer sbsql = new StringBuffer();
+			sbsql.append(" dts.puesto.grupoOcupacional.regimen.rgmDescripcion");
+			sbsql.append(" from DetallePuesto dts");
+			sbsql.append(" where dts.dpstId =  :dtpsId");
+			 
+			Query q = em.createQuery(sbsql.toString());
+			q.setParameter("dpstId", dpstId);
+			retorno = (String) q.getSingleResult();
+			    
+			}catch(Exception  e){
+				e.printStackTrace();
+				retorno="";
+			}
+			
+			return retorno;
+
+
+	}
+
 }

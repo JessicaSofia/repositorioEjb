@@ -62,4 +62,26 @@ public class DependenciaServicioImpl implements DependenciaServicio {
 		return retorno;
 	}
 
+	@Override
+	public String obtenerNombreDependenciaporDetallePuestoId(int dpstId) {
+		String retorno="";
+		try{
+			StringBuffer sbsql = new StringBuffer();
+			sbsql.append(" dts.dependencia.dpnDescripcion");
+			sbsql.append(" from DetallePuesto dts");
+			sbsql.append(" where dts.dpstId = :dtpsId");
+			 
+			Query q = em.createQuery(sbsql.toString());
+			q.setParameter("dpstId", dpstId);
+			retorno = (String) q.getSingleResult();
+			    
+			}catch(Exception  e){
+				e.printStackTrace();
+				retorno="";
+			}
+			
+			return retorno;
+
+	}
+
 }

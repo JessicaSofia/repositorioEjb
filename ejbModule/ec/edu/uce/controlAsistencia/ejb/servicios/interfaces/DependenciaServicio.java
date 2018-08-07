@@ -11,4 +11,7 @@ public interface DependenciaServicio {
 	public Dependencia ObtenerPorId(int i);
 	
 	public List<Dependencia> obtenerListTodo();
+	
+
+	public String obtenerNombreDependenciaporDetallePuestoId(int dpstId);
 }

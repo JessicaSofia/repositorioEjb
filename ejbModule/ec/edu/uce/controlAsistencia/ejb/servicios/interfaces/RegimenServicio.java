@@ -14,4 +14,6 @@ public interface RegimenServicio {
 	public Regimen BuscarPorId(int id);
 	
 	public List<Regimen> ObtenerLstTodos();
+	
+	public String obtenerNombreRegimenporDetallePuestoId(int dpstId);
 }

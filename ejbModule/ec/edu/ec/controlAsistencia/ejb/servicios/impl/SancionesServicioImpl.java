@@ -46,8 +46,9 @@ public class SancionesServicioImpl implements SancionesServicio {
 		DetallePuestoSancion retorno=null;
 		try {
 			
-			em.merge(dtSancion);
+			retorno=em.merge(dtSancion);
 		}catch (Exception e) {
+			
 			throw e;
 		}
 		return retorno;
@@ -364,7 +365,7 @@ public class SancionesServicioImpl implements SancionesServicio {
 		sbsql.append(" select  dts.dtpssnDias  from  DetallePuestoSancion dts ");
 		sbsql.append(" where dts.dtpssnAno = :anio ");
 		sbsql.append(" and dts.dtpssnMes= :mes");
-		sbsql.append(" and dts.categoriaFalta.tipoSancion.tpsnId = :tpsnId ");
+		sbsql.append(" and dts.categoriaFalta.sancion.tipoSancion.tpsnId = :tpsnId ");
 		sbsql.append(" and dts.categoriaFalta.falta.flId = :flId ");
 		sbsql.append(" and  dts.dtpsId = :dtpsId ");
 		Query q = em.createQuery(sbsql.toString());

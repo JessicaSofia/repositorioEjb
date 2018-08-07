@@ -12,5 +12,11 @@ public interface PersonaServicio {
 	 */
 	public List<PersonaDto> BuscarPorNombres(String nombres);
 	
+	public String obtenerNombrePersonaporDetallePuestoId(int dpstId);
+	
+
+
+
+	
 
 }

@@ -96,4 +96,26 @@ public class PersonaServicioImpl implements PersonaServicio {
 		return persona;
        }
 
+	@Override
+	public String obtenerNombrePersonaporDetallePuestoId(int dpstId) {
+		String retorno="";
+		try{
+			StringBuffer sbsql = new StringBuffer();
+			sbsql.append(" dts.fichaEmpleado.persona.prsNombres||' '||dts.fichaEmpleado.persona.prsPrimerApellido||' '||dts.fichaEmpleado.persona.prsSegundoApellido ");
+			sbsql.append(" from DetallePuesto dts");
+			sbsql.append(" where dts.dpstId = :dtpsId");
+			 
+			Query q = em.createQuery(sbsql.toString());
+			q.setParameter("dpstId",dpstId);
+			retorno = (String) q.getSingleResult();
+			    
+			}catch(Exception  e){
+				e.printStackTrace();
+				retorno="";
+			}
+			
+			return retorno;
+
+	}
+
 }
