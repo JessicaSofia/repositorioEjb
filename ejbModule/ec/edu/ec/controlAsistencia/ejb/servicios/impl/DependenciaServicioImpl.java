@@ -67,12 +67,12 @@ public class DependenciaServicioImpl implements DependenciaServicio {
 		String retorno="";
 		try{
 			StringBuffer sbsql = new StringBuffer();
-			sbsql.append(" dts.dependencia.dpnDescripcion");
+			sbsql.append(" select dts.dependencia.dpnDescripcion");
 			sbsql.append(" from DetallePuesto dts");
-			sbsql.append(" where dts.dpstId = :dtpsId");
+			sbsql.append(" where dts.dtpsId = :dtpsId");
 			 
 			Query q = em.createQuery(sbsql.toString());
-			q.setParameter("dpstId", dpstId);
+			q.setParameter("dtpsId", dpstId);
 			retorno = (String) q.getSingleResult();
 			    
 			}catch(Exception  e){

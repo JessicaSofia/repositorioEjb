@@ -71,8 +71,8 @@ public class PermisoServicioImpl implements PermisoServicio {
 		try{
 		StringBuffer sbsql = new StringBuffer();
 		sbsql.append(" Select pr from Permiso pr where");
-		sbsql.append(" year(pr.prmHoraInicio) = :anio ");
-		sbsql.append(" and month(pr.prmHoraInicio)= :mes");
+		sbsql.append(" year(pr.prmFechaPermiso) = :anio ");
+		sbsql.append(" and month(pr.prmFechaPermiso)= :mes");
 		Query q = em.createQuery(sbsql.toString());
 		q.setParameter("anio",anio);
 		q.setParameter("mes",mes);
