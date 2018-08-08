@@ -124,7 +124,16 @@ public interface SancionesServicio {
 	 * @param tpSn
 	 * @return
 	 */
-	public DetallePuestoSancion obtenerUltimaSancion(int dtpsId );
+	public DetallePuestoSancion obtenerUltimaSancion(int dtpsId, int tpsnId );
+	
+	/**
+	 * Obtiene un objeto de tipo DetallePuestoSancion por tpSancion y Falta
+	 * @param dtpsId
+	 * @param tpsnId
+	 * @param fltId
+	 * @return
+	 */
+	public DetallePuestoSancion obtenerUltimaSancionPorTpSancionFaltaId(int dtpsId, int tpsnId, int fltId );
 	
 	/**
 	 * Obtine un entidad dee tipo DetallePuestoSancion por Mes, anio, categoriaFalta y detallePuesto Id
