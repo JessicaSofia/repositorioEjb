@@ -64,7 +64,7 @@ public class SancionesServicioImpl implements SancionesServicio {
 		StringBuffer sbsql = new StringBuffer();
 		sbsql.append(" Select dps from DetallePuestoSancion dps where");
 		sbsql.append(" dps.dtpsId = :detallePuestoId");
-		sbsql.append(" order by dps.dtpsId");
+		sbsql.append(" order by dps.dtpssnId desc");
 		Query q = em.createQuery(sbsql.toString());
 		q.setParameter("detallePuestoId",dtpsId);
 		retorno = (List<DetallePuestoSancion>)q.getResultList();
@@ -412,7 +412,7 @@ public class SancionesServicioImpl implements SancionesServicio {
 		try{
 		StringBuffer sbsql = new StringBuffer();
 		sbsql.append(" Select dps from DetallePuestoSancion dps ");
-		sbsql.append(" where  dps.dtpssnId = ( select max(dps1.dtpssnId) from  DetallePuestoSancion dps1  where dps1.dtpsId= :dtpsId and dps1.categoriaFalta.sancion.tipoSancion.tpsnId= :tpsnId ) ");
+		sbsql.append(" where  dps.dtpssnId = ( select max(dps1.dtpssnId) from  DetallePuestoSancion dps1  where dps1.dtpsId= :dtpsId and dps1.sancion.tipoSancion.tpsnId= :tpsnId ) ");
 		Query q = em.createQuery(sbsql.toString(),DetallePuestoSancion.class);
 		q.setParameter("dtpsId", dtpsId);
 		q.setParameter("tpsnId", tpsnId);
@@ -428,19 +428,20 @@ public class SancionesServicioImpl implements SancionesServicio {
 	}
 
 	@Override
-	public DetallePuestoSancion obtenerSancionPorMesAnio(int dtpsId, int ctgflId, int mes, int anio) {
+	public DetallePuestoSancion obtenerSancionPorMesAnio(int dtpsId, int ctgflId, int mes, int anio, int snId) {
 		DetallePuestoSancion retorno = null;
 		try{
 		StringBuffer sbsql = new StringBuffer();
 		sbsql.append(" Select dps from DetallePuestoSancion dps ");
-		sbsql.append(" where  dps.dtpsId= :dtpsId and dps.categoriaFalta.ctgflId= :ctgflId ");
+		sbsql.append(" where  dps.dtpsId= :dtpsId and dps.categoriaFalta.ctgflId= :ctgflId and dps.sancion.tipoSancion.tpsnId= :snId ");
 		sbsql.append(" and  dps.dtpssnMes= :mes and dps.dtpssnAno= :anio ");
 		Query q = em.createQuery(sbsql.toString(),DetallePuestoSancion.class);
 		q.setParameter("dtpsId", dtpsId);
 		q.setParameter("ctgflId", ctgflId);
 		q.setParameter("mes", mes);
 		q.setParameter("anio", anio);
-	
+		q.setParameter("snId", snId);
+		
 		retorno = (DetallePuestoSancion)q.getSingleResult();
 	
 		}catch(Exception  e){
@@ -483,7 +484,7 @@ public class SancionesServicioImpl implements SancionesServicio {
 		try{
 		StringBuffer sbsql = new StringBuffer();
 		sbsql.append(" Select dps from DetallePuestoSancion dps ");
-		sbsql.append(" where  dps.dtpssnId = ( select max(dps1.dtpssnId) from  DetallePuestoSancion dps1  where dps1.dtpsId= :dtpsId and dps1.categoriaFalta.sancion.tipoSancion.tpsnId= :tpsnId and dps1.categoriaFalta.falta.flId= :flId) ");
+		sbsql.append(" where  dps.dtpssnId = ( select max(dps1.dtpssnId) from  DetallePuestoSancion dps1  where dps1.dtpsId= :dtpsId and dps1.sancion.tipoSancion.tpsnId= :tpsnId and dps1.categoriaFalta.falta.flId= :flId) ");
 		Query q = em.createQuery(sbsql.toString(),DetallePuestoSancion.class);
 		q.setParameter("dtpsId", dtpsId);
 		q.setParameter("tpsnId", tpsnId);
@@ -497,6 +498,27 @@ public class SancionesServicioImpl implements SancionesServicio {
 		
 		return retorno;
 
+	}
+
+	@Override
+	public Sancion obtenerSancionPorNivelPorTipoSancion(int nivel, int tpSnId) {
+		Sancion retorno = null;
+		try{
+		StringBuffer sbsql = new StringBuffer();
+		sbsql.append(" Select sn from Sancion sn");
+		sbsql.append(" where sn.snNivel= :nivel and sn.tipoSancion.tpsnId= :tpsnId ");
+		Query q = em.createQuery(sbsql.toString());
+		q.setParameter("nivel", nivel);
+		q.setParameter("tpsnId", tpSnId);
+		retorno = (Sancion)q.getSingleResult();
+	
+		}catch(Exception  e){
+			 e.printStackTrace();
+			return null;
+		}
+		
+		return retorno;
+	
 	}
 	
 	

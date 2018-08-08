@@ -38,6 +38,8 @@ public interface SancionesServicio {
  */
 	public List<Sancion> listarSancion();
 	
+	public Sancion obtenerSancionPorNivelPorTipoSancion(int nivel, int tpSnId);
+	
 	/**
 	 * Obtiene una lista de las faltas
 	 * @return
@@ -143,7 +145,7 @@ public interface SancionesServicio {
 	 * @param anio
 	 * @return
 	 */
-	public DetallePuestoSancion obtenerSancionPorMesAnio(int dtpsId,int ctgflId, int mes,int anio);
+	public DetallePuestoSancion obtenerSancionPorMesAnio(int dtpsId,int ctgflId, int mes,int anio, int snId);
 	
 	/**
 	 * Obtner sueldo por dtpsId
