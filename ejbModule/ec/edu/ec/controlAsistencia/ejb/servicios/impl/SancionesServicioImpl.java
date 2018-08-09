@@ -407,19 +407,25 @@ public class SancionesServicioImpl implements SancionesServicio {
 	}
 
 	@Override
-	public DetallePuestoSancion  obtenerUltimaSancion( int dtpsId, int tpsnId) {
+	public DetallePuestoSancion  obtenerUltimaSancion( int dtpsId, int tpsnId, int anio, int mes) {
 		DetallePuestoSancion retorno = null;
 		try{
 		StringBuffer sbsql = new StringBuffer();
 		sbsql.append(" Select dps from DetallePuestoSancion dps ");
-		sbsql.append(" where  dps.dtpssnId = ( select max(dps1.dtpssnId) from  DetallePuestoSancion dps1  where dps1.dtpsId= :dtpsId and dps1.sancion.tipoSancion.tpsnId= :tpsnId ) ");
+		sbsql.append(" where  dps.dtpssnId = ( select max(dps1.dtpssnId) from  DetallePuestoSancion dps1  where dps1.dtpsId= :dtpsId and dps1.sancion.tipoSancion.tpsnId= :tpsnId  ");
+		sbsql.append(" and to_date('' || dps1.dtpssnAno || '/' ||dps1.dtpssnMes||'/'||1,'yyyy/mm/dd' ) < to_date(''|| :anio ||'/'|| :mes ||'/'||1, 'yyyy/mm/dd')) ");
 		Query q = em.createQuery(sbsql.toString(),DetallePuestoSancion.class);
 		q.setParameter("dtpsId", dtpsId);
 		q.setParameter("tpsnId", tpsnId);
+
+		q.setParameter("anio", anio);
+
+		q.setParameter("mes", mes);
 	
 		retorno = (DetallePuestoSancion)q.getSingleResult();
 	
 		}catch(Exception  e){
+			e.printStackTrace();
 		 return null; 
 		}
 		

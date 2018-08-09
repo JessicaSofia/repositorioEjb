@@ -126,7 +126,7 @@ public interface SancionesServicio {
 	 * @param tpSn
 	 * @return
 	 */
-	public DetallePuestoSancion obtenerUltimaSancion(int dtpsId, int tpsnId );
+	public DetallePuestoSancion obtenerUltimaSancion(int dtpsId, int tpsnId, int anio, int mes );
 	
 	/**
 	 * Obtiene un objeto de tipo DetallePuestoSancion por tpSancion y Falta
