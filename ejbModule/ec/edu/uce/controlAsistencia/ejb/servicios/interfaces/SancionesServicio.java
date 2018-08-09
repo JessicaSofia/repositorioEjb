@@ -155,4 +155,10 @@ public interface SancionesServicio {
 	public  int ObtnerSueldoPorDetallePuestoId(int dtpsId);
 	
 
+	/***
+	 * Obtiene una lista  todas las multas por DetallePuesto Id
+	 * @param dtpsId
+	 * @return
+	 */
+	public List<DetallePuestoSancion> listarSancionMultasPorDetallePuestoId(int dtpsId, int dtpssnMes, int dtpssnAno);
 }

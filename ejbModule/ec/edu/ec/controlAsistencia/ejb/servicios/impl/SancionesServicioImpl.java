@@ -527,6 +527,30 @@ public class SancionesServicioImpl implements SancionesServicio {
 	
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<DetallePuestoSancion> listarSancionMultasPorDetallePuestoId(int dtpsId, int dtpssnMes, int dtpssnAno) {
+		List<DetallePuestoSancion> retorno = null;
+		try{
+		StringBuffer sbsql = new StringBuffer();
+		sbsql.append(" Select dps from DetallePuestoSancion dps where");
+		sbsql.append(" dps.dtpsId = :detallePuestoId and dps.sancion.snId = 1");
+		sbsql.append(" and dps.dtpssnMes = :dtpssnMes and dps.dtpssnAno = :dtpssnAno");
+		sbsql.append(" order by dps.dtpssnId desc");
+		Query q = em.createQuery(sbsql.toString());
+		q.setParameter("detallePuestoId",dtpsId);
+		q.setParameter("dtpssnMes",dtpssnMes);
+		q.setParameter("dtpssnAno",dtpssnAno);
+		retorno = (List<DetallePuestoSancion>)q.getResultList();
+	
+		}catch(Exception  e){
+			throw  e; 
+		}
+		
+		return retorno;
+	
+	}
+	
 	
 	
 }
