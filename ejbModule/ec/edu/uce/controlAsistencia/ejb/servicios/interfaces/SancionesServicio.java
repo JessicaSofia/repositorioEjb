@@ -118,7 +118,7 @@ public interface SancionesServicio {
 	
 	
 	 
-	public List<ReporteSancion> listarDtSancionAnualPorAnioMesRegimenIdTipoSancionId(int anio, int mes, int rgmId, int tpSnId, int mesFin);
+	public List<ReporteSancion> listarDtSancionAnualPorAnioMesRegimenIdTipoSancionId(int anioInicio, int mesInicio, int rgmId, int tpSnId, int anioFin, int mesFin);
 	       
 
 	/**
@@ -161,4 +161,8 @@ public interface SancionesServicio {
 	 * @return
 	 */
 	public List<DetallePuestoSancion> listarSancionMultasPorDetallePuestoId(int dtpsId, int dtpssnMes, int dtpssnAno);
+	
+	
+	
+	public List<String>  listarfaltasPorDtPuestoIdMesAnioTipoSancion(int dtpsId, int mes, int  anio, int tpSnId);
 }

@@ -1,7 +1,9 @@
 package ec.edu.uce.controlAsistencia.ejb.datos;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ReporteSancion  implements Serializable {
 
@@ -21,7 +23,12 @@ public class ReporteSancion  implements Serializable {
 	private String dependencia;
 	private int frecuencia;
 	private String sancion;
+	private List<String> faltas;
 	private List<ReporteSancion> lstSanciones;
+	
+	
+	
+
 	
 	
 	
@@ -59,6 +66,10 @@ public class ReporteSancion  implements Serializable {
 			this.dtpsId=dtpsId;
 			this.lstSanciones=faltas;
 		}
+	 
+	
+	 
+	 
 		
 	public ReporteSancion() {
 		super();
@@ -148,6 +159,14 @@ public class ReporteSancion  implements Serializable {
 
 	public void setLstSanciones(List<ReporteSancion> lstSanciones) {
 		this.lstSanciones = lstSanciones;
+	}
+
+	public List<String> getFaltas() {
+		return faltas;
+	}
+
+	public void setFaltas(List<String> faltas) {
+		this.faltas = faltas;
 	}
 	
 	
