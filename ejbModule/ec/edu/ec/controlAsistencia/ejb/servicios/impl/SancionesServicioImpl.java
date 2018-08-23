@@ -140,18 +140,19 @@ public class SancionesServicioImpl implements SancionesServicio {
 	}
 
 	@Override
-	public int MaximaNumAutorizacion() {
+	public int MaximaNumAutorizacion(int tpSanId) {
 		 int  numMaxima=0;
 		 try{
 			 
 			 Calendar fechaFinal = Calendar.getInstance();
 			 int anioactual=fechaFinal.get(Calendar.YEAR);
 				StringBuffer sbsql = new StringBuffer();
-				sbsql.append(" select  case when Max(dtpssn.dtpssnNumaccion) is null then 0 else Max(dtpssn.dtpssnNumaccion)  end from DetallePuestoSancion  dtpssn");
-				sbsql.append(" WHERE   year(dtpssn.dtpssnFechaEmision) = :anioActual)");
-				sbsql.append(" AND dtpssn.dtpssnEstado=1");
+				sbsql.append(" select case when Max(dtpssn.dtpssnNumaccion) is null then 0 else Max(dtpssn.dtpssnNumaccion)  end from DetallePuestoSancion  dtpssn ");
+				sbsql.append(" WHERE year(dtpssn.dtpssnFechaEmision) = :anioActual ");
+				sbsql.append(" AND dtpssn.sancion.tipoSancion.tpsnId = :tpSnId ");
 				Query q = em.createQuery(sbsql.toString());
 				q.setParameter("anioActual",anioactual);
+				q.setParameter("tpSnId",tpSanId);
 				numMaxima = (int) q.getSingleResult();
 				
 				}catch(Exception  e){
@@ -413,7 +414,8 @@ public class SancionesServicioImpl implements SancionesServicio {
 		StringBuffer sbsql = new StringBuffer();
 		sbsql.append(" Select dps from DetallePuestoSancion dps ");
 		sbsql.append(" where  dps.dtpssnId = ( select max(dps1.dtpssnId) from  DetallePuestoSancion dps1  where dps1.dtpsId= :dtpsId and dps1.sancion.tipoSancion.tpsnId= :tpsnId  ");
-		sbsql.append(" and to_date('' || dps1.dtpssnAno || '/' ||dps1.dtpssnMes||'/'||1,'yyyy/mm/dd' ) < to_date(''|| :anio ||'/'|| :mes ||'/'||1, 'yyyy/mm/dd')) ");
+		sbsql.append(" and to_date('' || dps1.dtpssnAno || '/' ||dps1.dtpssnMes||'/'||1,'yyyy/mm/dd' ) < to_date(''|| :anio ||'/'|| :mes ||'/'||1, 'yyyy/mm/dd') ");
+		sbsql.append("  and dps.dtpssnEstado=1 )");
 		Query q = em.createQuery(sbsql.toString(),DetallePuestoSancion.class);
 		q.setParameter("dtpsId", dtpsId);
 		q.setParameter("tpsnId", tpsnId);

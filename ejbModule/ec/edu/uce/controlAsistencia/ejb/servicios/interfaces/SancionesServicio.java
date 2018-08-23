@@ -61,7 +61,7 @@ public interface SancionesServicio {
 	 * Genera el  numero de Accion 
 	 * @return
 	 */
-	public int MaximaNumAutorizacion();
+	public int MaximaNumAutorizacion(int tpSanId);
 	
 	/**
 	 * Obtine la entidad falta por FaltaId
