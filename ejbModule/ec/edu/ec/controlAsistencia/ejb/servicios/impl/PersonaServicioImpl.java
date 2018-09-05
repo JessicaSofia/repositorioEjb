@@ -55,7 +55,7 @@ public class PersonaServicioImpl implements PersonaServicio {
 		sbsql.append( " left join groc.regimen rgm "  );
 		sbsql.append( " left join dtlp.dependencia d " );
 		sbsql.append( " left join fch.persona  prs " );
-		sbsql.append(" where prs.prsPrimerApellido LIKE :nombres ");
+		sbsql.append(" where prs.prsPrimerApellido LIKE upper(:nombres) ");
 		 
 		Query q = em.createQuery(sbsql.toString());
 		q.setParameter("nombres","%"+nombres+"%");
