@@ -619,6 +619,48 @@ public class SancionesServicioImpl implements SancionesServicio {
 		return retorno;	
 	
 	}
+
+	@Override
+	public String obtenerPartidaPresupuestariaPorDetallePuestoId(int dtpsId) {
+		
+		String partidaPresupuestaria="";
+		try {
+		StringBuffer sbsql = new StringBuffer();
+		sbsql.append(" select case when  prti.pridPresupuestaria is null then '' else prti.pridPresupuestaria  end ");
+		sbsql.append(" from DetallePuesto dtps, PartidaIndividual prti ");
+		sbsql.append(" where dtps.dtpsId= :dtpsId  ");
+		sbsql.append(" and dtps.partidaIndividual.pridId= prti.pridId ");
+		Query q = em.createQuery(sbsql.toString());
+		q.setParameter("dtpsId", dtpsId);
+		partidaPresupuestaria = (String) q.getSingleResult();
+		
+		}catch(Exception  e){
+			throw  e; 
+		}
+
+ 		return partidaPresupuestaria;
+	}
+
+	@Override
+	public String obtenerPartidaIndividualPorDetallePuestoId(int dtpsId) {
+		
+		String partidaIndividual="";
+		try {
+		StringBuffer sbsql = new StringBuffer();
+		sbsql.append(" select case when  prti.pridIndividual is null then '' else prti.pridIndividual  end ");
+		sbsql.append(" from DetallePuesto dtps, PartidaIndividual prti ");
+		sbsql.append(" where dtps.dtpsId= :dtpsId  ");
+		sbsql.append(" and dtps.partidaIndividual.pridId= prti.pridId ");
+		Query q = em.createQuery(sbsql.toString());
+		q.setParameter("dtpsId", dtpsId);
+		partidaIndividual = (String) q.getSingleResult();
+		
+		}catch(Exception  e){
+			throw  e; 
+		}
+
+ 		return partidaIndividual;
+	}
 }
 
 

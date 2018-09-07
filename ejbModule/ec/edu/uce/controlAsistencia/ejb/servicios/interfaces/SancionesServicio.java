@@ -163,6 +163,28 @@ public interface SancionesServicio {
 	public List<DetallePuestoSancion> listarSancionMultasPorDetallePuestoId(int dtpsId, int dtpssnMes, int dtpssnAno);
 	
 	
-	
+	/***
+	 * 
+	 * @param dtpsId
+	 * @param mes
+	 * @param anio
+	 * @param tpSnId
+	 * @return
+	 */
 	public List<String>  listarfaltasPorDtPuestoIdMesAnioTipoSancion(int dtpsId, int mes, int  anio, int tpSnId);
+	
+	/***
+	 * Obtiene la partida presupuestaria de un empleado por DetallePuestoId
+	 * @param dtpsId
+	 * @return
+	 */
+	public  String obtenerPartidaPresupuestariaPorDetallePuestoId(int dtpsId);
+	
+	/**
+	 * Obtiene la partida Individual de un empleado por DetalllePuestoId
+	 * @param dtpsId
+	 * @return
+	 */
+	public String obtenerPartidaIndividualPorDetallePuestoId(int dtpsId);
+	
 }
