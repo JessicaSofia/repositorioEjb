@@ -10,4 +10,11 @@ public interface ContratoServicio {
 	 * @return
 	 */
 	public Contrato obtenerporDetallePuestoId(int dtpsId);
+	
+	/***
+	 * Obtine una entidad de tipo de Contrato por Id
+	 * @param id
+	 * @return
+	 */
+	public Contrato obtenerPorId(int id);
 }

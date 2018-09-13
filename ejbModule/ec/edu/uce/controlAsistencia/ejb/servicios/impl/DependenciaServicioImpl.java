@@ -1,4 +1,4 @@
-package ec.edu.ec.controlAsistencia.ejb.servicios.impl;
+package ec.edu.uce.controlAsistencia.ejb.servicios.impl;
 
 import ec.edu.uce.controlAsistencia.ejb.servicios.interfaces.DependenciaServicio;
 import ec.edu.uce.controlAsistencia.jpa.entidades.Dependencia;

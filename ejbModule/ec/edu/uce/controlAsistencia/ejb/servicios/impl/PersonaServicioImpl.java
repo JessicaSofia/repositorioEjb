@@ -1,4 +1,4 @@
-package ec.edu.ec.controlAsistencia.ejb.servicios.impl;
+package ec.edu.uce.controlAsistencia.ejb.servicios.impl;
 
 import ec.edu.uce.controlAsistencia.ejb.datos.PersonaDto;
 import ec.edu.uce.controlAsistencia.ejb.servicios.interfaces.PersonaServicio;
@@ -48,7 +48,7 @@ public class PersonaServicioImpl implements PersonaServicio {
 		StringBuffer sbsql = new StringBuffer();
 		sbsql.append(" Select prs.prsId, prs.prsNombres, prs.prsIdentificacion, prs.prsPrimerApellido, prs.prsSegundoApellido, ");
 		sbsql.append(" fch.fcemId, dtlp.dtpsId, d.dpnId,  d.dpnDescripcion, p.pstId, p.pstDenominacion, rgm.rgmId, rgm.rgmDescripcion, ");
-		sbsql.append(" fch.categoria.ctgId ");
+		sbsql.append(" fch.categoria.ctgId, dtlp.contrato.cntId ");
 		sbsql.append(" from DetallePuesto dtlp  left join  dtlp.fichaEmpleado fch ");
 		sbsql.append( " left join dtlp.puesto p " );
 		sbsql.append( " left join p.grupoOcupacional groc "  );
@@ -85,6 +85,7 @@ public class PersonaServicioImpl implements PersonaServicio {
             	valor=Integer.parseInt(String.valueOf(obj[13]));
             }
             p.setCtgId(valor);
+            p.setCtnId(Integer.parseInt(String.valueOf(obj[14])));
           
             persona.add(p);
         }

@@ -20,7 +20,7 @@
  05-MAY-2016           Dennis Collaguazo                   Emisión Inicial
  ***************************************************************************/
 
-package ec.edu.ec.controlAsistencia.ejb.servicios.impl;
+package ec.edu.uce.controlAsistencia.ejb.servicios.impl;
 
 
 import java.util.List;
@@ -35,14 +35,6 @@ import javax.persistence.Query;
 import ec.edu.uce.controlAsistencia.ejb.servicios.interfaces.UsuarioRolServicio;
 import ec.edu.uce.controlAsistencia.jpa.entidades.UsuarioRol;
 
-
-
-/**
- * Clase (Bean)UsuarioRolServicioImpl.
- * Bean declarado como Stateless.
- * @author dcollaguazo
- * @version 1.0
- */
 
 @Stateless
 public class UsuarioRolServicioImpl implements UsuarioRolServicio{

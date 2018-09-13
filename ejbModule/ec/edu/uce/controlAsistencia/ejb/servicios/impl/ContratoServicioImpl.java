@@ -1,4 +1,4 @@
-package ec.edu.ec.controlAsistencia.ejb.servicios.impl;
+package ec.edu.uce.controlAsistencia.ejb.servicios.impl;
 
 
 import javax.ejb.Stateless;
@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 
 import ec.edu.uce.controlAsistencia.ejb.servicios.interfaces.ContratoServicio;
 import ec.edu.uce.controlAsistencia.jpa.entidades.Contrato;
+import ec.edu.uce.controlAsistencia.jpa.entidades.FichaEmpleado;
 
 @Stateless
 public class ContratoServicioImpl implements ContratoServicio {
@@ -27,5 +28,22 @@ public class ContratoServicioImpl implements ContratoServicio {
 	}
 	return retorno;
 	}
+
+
+	@Override
+	public Contrato obtenerPorId(int id) {
+	       
+    	Contrato contrato=null;
+    	try{
+    		contrato = em.find(Contrato.class, id);                  
+    		
+    	}catch(Exception e){
+    		throw e;
+    	}
+    	return contrato;
+		
+	}
+	
+	
 
 }

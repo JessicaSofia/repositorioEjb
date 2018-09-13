@@ -21,6 +21,7 @@ public class PersonaDto  implements Serializable {
 	private int rgmId;
 	private int rllbId;
 	private int ctgId;
+	private int cntId;
 	private String dpnNombre;
 	private String pstNombre;
 	private String rgmNombre;
@@ -260,6 +261,17 @@ public class PersonaDto  implements Serializable {
 
 	public void setRgmNombre(String rgmNombre) {
 		this.rgmNombre = rgmNombre;
+	}
+
+	public int getCtnId() {
+		return cntId;
+	}
+
+
+
+
+	public void setCtnId(int cntId) {
+		this.cntId = cntId;
 	}
 
 
