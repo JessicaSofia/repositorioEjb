@@ -85,8 +85,11 @@ public class PersonaServicioImpl implements PersonaServicio {
             	valor=Integer.parseInt(String.valueOf(obj[13]));
             }
             p.setCtgId(valor);
-            p.setCtnId(Integer.parseInt(String.valueOf(obj[14])));
-          
+            int contr=0;
+            if(!String.valueOf(obj[14]).equals("null")) {
+            	contr=Integer.parseInt(String.valueOf(obj[14]));
+            }
+            p.setCtnId(contr);  
             persona.add(p);
         }
 		}catch(Exception  e){
