@@ -51,8 +51,7 @@ public class PersonaServicioImpl implements PersonaServicio {
 		sbsql.append(" fch.categoria.ctgId, dtlp.contrato.cntId ");
 		sbsql.append(" from DetallePuesto dtlp  left join  dtlp.fichaEmpleado fch ");
 		sbsql.append( " left join dtlp.puesto p " );
-		sbsql.append( " left join p.grupoOcupacional groc "  );
-		sbsql.append( " left join groc.regimen rgm "  );
+		sbsql.append( " left join p.regimen rgm "  );
 		sbsql.append( " left join dtlp.dependencia d " );
 		sbsql.append( " left join fch.persona  prs " );
 		sbsql.append(" where prs.prsPrimerApellido LIKE upper(:nombres) ");
@@ -78,7 +77,11 @@ public class PersonaServicioImpl implements PersonaServicio {
    
             p.setPstId(Integer.parseInt(String.valueOf(obj[9])));
             p.setPstNombre(String.valueOf(obj[10]));
-            p.setRgmId(Integer.parseInt(String.valueOf(obj[11])));
+            int reg=0;
+            if(!String.valueOf(obj[11]).equals("null")) {
+            	reg=Integer.parseInt(String.valueOf(obj[11]));
+            }
+            p.setRgmId(reg);
             p.setRgmNombre(String.valueOf(obj[12]));
             int valor=0;
             if(!String.valueOf(obj[13]).equals("null")) {
