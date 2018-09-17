@@ -1,5 +1,6 @@
 package ec.edu.uce.controlAsistencia.ejb.servicios.interfaces;
 
+import ec.edu.uce.controlAsistencia.ejb.datos.ContratoDto;
 import ec.edu.uce.controlAsistencia.jpa.entidades.Contrato;
 
 public interface ContratoServicio {
@@ -16,5 +17,5 @@ public interface ContratoServicio {
 	 * @param id
 	 * @return
 	 */
-	public Contrato obtenerPorId(int id);
+	public ContratoDto obtenerPorId(int id);
 }
