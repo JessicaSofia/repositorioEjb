@@ -58,6 +58,16 @@ public interface SancionesServicio {
 	public List<CategoriaFalta> listarcategoriaFaltaPorCategoriaIdFaltaId(int ctgId, int ftId);
 	
 	/**
+	 * Obtiene parametros de sanciones por rgmId y FaltaId
+	 * @param rgmId
+	 * @param ftId
+	 * @return
+	 */
+	public List<CategoriaFalta> listarcategoriaFaltaPorRgmIdFaltaId(int rgmId, int ftId);
+	
+	
+	
+	/**
 	 * Genera el  numero de Accion 
 	 * @return
 	 */

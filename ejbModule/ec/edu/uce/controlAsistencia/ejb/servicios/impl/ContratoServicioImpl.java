@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import ec.edu.uce.controlAsistencia.ejb.datos.AccionPersonalDto;
 import ec.edu.uce.controlAsistencia.ejb.datos.ContratoDto;
 import ec.edu.uce.controlAsistencia.ejb.datos.PersonaDto;
 import ec.edu.uce.controlAsistencia.ejb.servicios.interfaces.ContratoServicio;
@@ -73,6 +74,43 @@ public class ContratoServicioImpl implements ContratoServicio {
 		return contrato;
 
 		
+	}
+
+
+	@Override
+	public AccionPersonalDto obtenerAccionPersonal(int dtpsId) {
+		List<Object[]> retorno = new ArrayList<>();
+    	AccionPersonalDto nombramiento=null;
+    	
+    	
+		try{
+		StringBuffer sbsql = new StringBuffer();
+		sbsql.append(" Select acp.acprId, acp.acprEstado, acp.acprFecha, acp.acprFechaPosesion, acp.tipoAccion ");
+		sbsql.append(" from AccionPersonal acp  ");
+		sbsql.append(" where acp.acprEstado =1 and  acp.detallePuesto.dtpsId= :dtpsId");
+		 
+		Query q = em.createQuery(sbsql.toString());
+		q.setParameter("dtpsId", dtpsId);
+		retorno = q.getResultList();
+		
+		Iterator itr = retorno.iterator();
+        while (itr.hasNext()){
+            Object[] obj = (Object[]) itr.next();
+            nombramiento=new AccionPersonalDto();
+            nombramiento.setAcprId(Integer.parseInt(String.valueOf(obj[0])));
+            nombramiento.setAcprEstado(Integer.parseInt(String.valueOf(obj[1])));
+            nombramiento.setAcprFecha(Date.valueOf(String.valueOf(obj[2]).trim()));
+            nombramiento.setAcprFechaPosesion(Date.valueOf(String.valueOf(obj[3]).trim()));
+            nombramiento.setTipoAccion(Integer.parseInt(String.valueOf(obj[4])));
+   
+        }
+		}catch(Exception  e){
+			e.printStackTrace();
+			return null;
+		}
+		return nombramiento;
+
+
 	}
 	
 	

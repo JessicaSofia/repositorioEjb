@@ -661,6 +661,28 @@ public class SancionesServicioImpl implements SancionesServicio {
 
  		return partidaIndividual;
 	}
+
+	@Override
+	public List<CategoriaFalta> listarcategoriaFaltaPorRgmIdFaltaId(int rgmId, int ftId) {
+		
+		List<CategoriaFalta> retorno = null;
+		try{
+		StringBuffer sbsql = new StringBuffer();
+		sbsql.append(" Select ctf from CategoriaFalta ctf where");
+		sbsql.append(" ctf.regimen.rgmId= :rgmId");
+		sbsql.append(" and ctf.falta.flId= :flId");
+		Query q = em.createQuery(sbsql.toString());
+		q.setParameter("rgmId",rgmId);
+		q.setParameter("flId",ftId);
+		retorno = (List<CategoriaFalta>)q.getResultList();
+	
+		}catch(Exception  e){
+			throw  e; 
+		}
+		
+		return retorno;
+	
+	}
 }
 
 
