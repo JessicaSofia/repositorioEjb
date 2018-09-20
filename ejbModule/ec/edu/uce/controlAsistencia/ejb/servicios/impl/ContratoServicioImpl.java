@@ -50,7 +50,7 @@ public class ContratoServicioImpl implements ContratoServicio {
 		StringBuffer sbsql = new StringBuffer();
 		sbsql.append(" Select cnt.cntId, cnt.cntEstado, cnt.cntFechaFin, cnt.cntFechaInicio ");
 		sbsql.append(" from Contrato cnt  ");
-		sbsql.append(" where cnt.cntEstado = 0 and  cnt.cntId= :id");
+		sbsql.append(" where cnt.cntEstado = 1 and  cnt.cntId= :id");
 		 
 		Query q = em.createQuery(sbsql.toString());
 		q.setParameter("id", id);
@@ -68,7 +68,7 @@ public class ContratoServicioImpl implements ContratoServicio {
    
         }
 		}catch(Exception  e){
-			e.printStackTrace();
+			
 			return null;
 		}
 		return contrato;
