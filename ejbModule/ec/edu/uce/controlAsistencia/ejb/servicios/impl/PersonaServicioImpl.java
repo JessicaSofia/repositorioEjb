@@ -54,11 +54,30 @@ public class PersonaServicioImpl implements PersonaServicio {
 		sbsql.append( " left join p.regimen rgm "  );
 		sbsql.append( " left join dtlp.dependencia d " );
 		sbsql.append( " left join fch.persona  prs " );
-		sbsql.append(" where prs.prsPrimerApellido LIKE upper(:nombres) ");
-		 
+		sbsql.append(" where prs.prsPrimerApellido LIKE upper(:nombres)  ");
+		sbsql.append(" and dtlp.contrato.cntId is not null  ");
+		sbsql.append(" and dtlp.contrato.cntEstado=0");
+		
 		Query q = em.createQuery(sbsql.toString());
 		q.setParameter("nombres","%"+nombres+"%");
 		retorno = q.getResultList();
+		
+		if (retorno == null) {
+			StringBuffer sbsql1 = new StringBuffer();
+			sbsql1.append(" Select prs.prsId, prs.prsNombres, prs.prsIdentificacion, prs.prsPrimerApellido, prs.prsSegundoApellido, ");
+			sbsql1.append(" fch.fcemId, dtlp.dtpsId, d.dpnId,  d.dpnDescripcion, p.pstId, p.pstDenominacion, rgm.rgmId, rgm.rgmDescripcion, ");
+			sbsql1.append(" fch.categoria.ctgId, dtlp.contrato.cntId ");
+			sbsql1.append(" from  AccionPersonal  acp left join acp.detallePuesto dtlp  left join  dtlp.fichaEmpleado fch ");
+			sbsql1.append( " left join dtlp.puesto p " );
+			sbsql1.append( " left join p.regimen rgm "  );
+			sbsql1.append( " left join dtlp.dependencia d " );
+			sbsql1.append( " left join fch.persona  prs " );
+			sbsql1.append(" where prs.prsPrimerApellido LIKE upper(:nombres)  ");
+			sbsql1.append(" and   acp.acprEstado=0");
+			Query q1 = em.createQuery(sbsql.toString());
+			q1.setParameter("nombres","%"+nombres+"%");
+			retorno = q1.getResultList();	
+		}
 		
 		Iterator itr = retorno.iterator();
         while (itr.hasNext()){
