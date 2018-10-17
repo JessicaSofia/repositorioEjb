@@ -85,7 +85,7 @@ public class ContratoServicioImpl implements ContratoServicio {
     	
 		try{
 		StringBuffer sbsql = new StringBuffer();
-		sbsql.append(" Select acp.acprId, acp.acprEstado, acp.acprFecha, acp.acprFechaPosesion, acp.tipoAccion ");
+		sbsql.append(" Select acp.acprId, acp.acprEstado, acp.acprFecha, acp.tipoAccion.tpacId ");
 		sbsql.append(" from AccionPersonal acp  ");
 		sbsql.append(" where acp.acprEstado =0 and  acp.detallePuesto.dtpsId= :dtpsId");
 		 
@@ -100,8 +100,8 @@ public class ContratoServicioImpl implements ContratoServicio {
             nombramiento.setAcprId(Integer.parseInt(String.valueOf(obj[0])));
             nombramiento.setAcprEstado(Integer.parseInt(String.valueOf(obj[1])));
             nombramiento.setAcprFecha(Date.valueOf(String.valueOf(obj[2]).trim()));
-            nombramiento.setAcprFechaPosesion(Date.valueOf(String.valueOf(obj[3]).trim()));
-            nombramiento.setTipoAccion(Integer.parseInt(String.valueOf(obj[4])));
+           // nombramiento.setAcprFechaPosesion(Date.valueOf(String.valueOf(obj[3]).trim()));
+            nombramiento.setTipoAccion(Integer.parseInt(String.valueOf(obj[3])));
    
         }
 		}catch(Exception  e){

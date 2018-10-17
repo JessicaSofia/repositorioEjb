@@ -62,7 +62,7 @@ public class PersonaServicioImpl implements PersonaServicio {
 		q.setParameter("nombres","%"+nombres+"%");
 		retorno = q.getResultList();
 		
-		if (retorno == null) {
+		if (retorno.isEmpty()) {
 			StringBuffer sbsql1 = new StringBuffer();
 			sbsql1.append(" Select prs.prsId, prs.prsNombres, prs.prsIdentificacion, prs.prsPrimerApellido, prs.prsSegundoApellido, ");
 			sbsql1.append(" fch.fcemId, dtlp.dtpsId, d.dpnId,  d.dpnDescripcion, p.pstId, p.pstDenominacion, rgm.rgmId, rgm.rgmDescripcion, ");
@@ -74,7 +74,7 @@ public class PersonaServicioImpl implements PersonaServicio {
 			sbsql1.append( " left join fch.persona  prs " );
 			sbsql1.append(" where prs.prsPrimerApellido LIKE upper(:nombres)  ");
 			sbsql1.append(" and   acp.acprEstado=0");
-			Query q1 = em.createQuery(sbsql.toString());
+			Query q1 = em.createQuery(sbsql1.toString());
 			q1.setParameter("nombres","%"+nombres+"%");
 			retorno = q1.getResultList();	
 		}
